@@ -1,0 +1,16 @@
+{
+  "no": "No",
+  "salesforce_id": "Sale Force Id",
+  "full_name": "Full Name",
+  "email": "Email",
+  "password": "Password",
+  "gender": "Gender",
+  "status": "Status",
+  "action": "Action",
+  "add_new_user": "Add New User",
+  "search_by_email": "Search by email",
+  "phone_number": "Phone Number",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "locale": "en-EN"
+}

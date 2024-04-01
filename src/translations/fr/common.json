@@ -1,0 +1,21 @@
+{
+  "sign_in": "s'identifier",
+  "login": "Connexion",
+  "email": "E-mail",
+  "PacePartner": "Vacances",
+  "submit": "Soumettre",
+  "back": "Dos",
+  "verify_code": "Vérifier le code",
+  "edit": "Modifier",
+  "cancel": "Annuler",
+  "general": "Générale",
+  "profile": "Profil",
+  "privacy_policy": "politique de confidentialité",
+  "logout": "Se déconnecter",
+  "about": "À propos",
+  "term_and_policy": "Durée et politique",
+  "all": "toute",
+  "save": "sauvegarder",
+  "create": "créer",
+  "no_term_and_policy_please_edit_to_add": "Aucune durée et politique. Veuillez modifier pour ajouter!"
+}

@@ -1,0 +1,271 @@
+@import url('https://use.typekit.net/uyg3umz.css');
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+  --tw-border-opacity:1;
+  --color-primary: 22 78 99;
+  --color-secondary: 226 232 240;
+  --color-success: 13 148 136;
+  --color-info: 6 182 212;
+  --color-warning: 245 158 11;
+  --color-pending: 217 119 6;
+  --color-danger: 185 28 28;
+  --color-light: 241 245 249;
+  --color-dark: 30 41 59;
+  --color-slate-50: 248 250 252;
+  --color-slate-100: 241 245 249;
+  --color-slate-200: 226 232 240;
+  --color-slate-300: 203 213 225;
+  --color-slate-400: 148 163 184;
+  --color-slate-500: 100 116 139;
+  --color-slate-600: 71 85 105;
+  --color-slate-700: 51 65 85;
+  --color-slate-800: 30 41 59;
+  --color-slate-900: 15 23 42;
+}
+
+@layer base {
+  html{
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont,
+    'Segoe UI, ' Roboto ', sans-serif;', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont,
+  'Segoe UI, ' Roboto ', sans-serif;', 'Oxygen', 'Ubuntu', 'Cantarell',
+  'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+-webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+.app-btn,
+.redirect-btn,
+.link-btn,
+.redirect-card {
+  cursor: pointer;
+}
+
+.app-btn:hover,
+.redirect-btn:hover,
+.link-btn:hover {
+  opacity: 0.6;
+}
+
+.redirect-card:hover {
+  transform: scale(1.015);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.ant-image-preview-img {
+  display: inline-block;
+}
+
+.header-menu__dropdown {
+  position: fixed !important;
+}
+
+.ant-layout-content {
+  width: 100%;
+  background-color: #fff;
+}
+
+.ant-tooltip-inner {
+  border-radius: 0.6rem;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 100;
+  src: url('fonts/Roboto-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 300;
+  src: url('fonts/Roboto-Light.ttf');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: url('fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 500;
+  src: url('fonts/Roboto-Medium.ttf');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 600;
+  src: url('fonts/Roboto-Medium.ttf');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  src: url('fonts/Roboto-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 800;
+  src: url('fonts/Roboto-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 900;
+  src: url('fonts/Roboto-Black.ttf');
+}
+
+.app-text,
+span,
+label,
+p,
+b,
+i,
+a,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto';
+  margin-bottom: 0;
+}
+
+.ant-popover-inner {
+  border-radius: 6px;
+}
+
+.header-dropdown-menu .ant-dropdown-menu{
+  margin-top: 0.625rem;
+  background-color: #164e63;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 3px 10px #00000080;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.header-dropdown-menu .ant-dropdown-menu li{
+  margin: 0.625rem 0;
+}
+
+.header-dropdown-menu .ant-dropdown-menu li .logout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-dropdown-menu .ant-dropdown-menu li span{
+ color: #f1f5f9;
+ margin-left: 4px;
+}
+
+.header-dropdown-menu .ant-dropdown-menu li:not(:last-child):after{
+  content: "";
+  position: absolute;
+  bottom: -0.625rem;
+  right: 0;
+  border-top: 1px solid #fff;
+  opacity: 0.3;
+  width: 100%;
+
+}
+
+.header-dropdown-menu .ant-dropdown-menu-item-disabled:hover,
+.header-dropdown-menu .ant-dropdown-menu-item:hover,
+.header-dropdown-menu .ant-dropdown-menu-submenu-title-disabled:hover {
+    background-color: rgb(255 255 255 / 0.05);
+    border-radius: 0.375rem;
+}
+
+.header-dropdown-menu .ant-dropdown-menu-title-content{
+  flex: unset;
+  position: relative;
+}
+
+/* Message antd */
+.ant-message-custom-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Table */
+
+.table-row-light{
+  background-color:#fff;
+}
+.table-row-dark{
+  background-color:#f1f5f9;
+}

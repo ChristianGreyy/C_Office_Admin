@@ -1,0 +1,38 @@
+{
+  "no": "Non",
+  "salesforce_id": "Identifiant de la force de vente",
+  "full_name": "Nom et prénom",
+  "email": "E-mail",
+  "mobile": "Mobile",
+  "gender": "Genre",
+  "status": "Statut",
+  "last_update_time": "Heure de la dernière mise à jour",
+  "action": "Action",
+  "add_new_user": "Ajouter un nouvel utilisateur",
+  "search_by_email": "Rechercher par e-mail",
+  "user_management": "Gestion des utilisateurs",
+
+  "user_detail": {
+    "user_detail": "DÉTAIL DE L'UTILISATEUR",
+    "login_link": "Lien de connexion",
+    "generate_link": "Générer un lien",
+    "phone": "Téléphone",
+    "export_availability": "Disponibilité à l'exportation",
+    "select_date_range": "Sélectionnez la plage de dates",
+    "export_csv": "Exporter CSV",
+    "export_xlsx": "Exporter XLSX",
+    "day": "Jour",
+    "night": "Nuit",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "edit_user_form": "MODIFIER LE FORMULAIRE UTILISATEUR",
+    "phone_number": "Numéro de téléphone",
+    "first_name": "Prénom",
+    "last_name": "Nom de famille",
+    "male": "Homme",
+    "female": "Femme",
+    "please_pick_your_start_date_and_end_date_before_exporting_file": "Veuillez choisir votre date de début et votre date de fin avant d'exporter le fichier"
+  },
+
+  "locale": "fr-FR"
+}

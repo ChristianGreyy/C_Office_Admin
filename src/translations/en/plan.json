@@ -1,0 +1,9 @@
+{
+  "sale_id":"Plan ID",
+  "plan_title_en":"Plan Title ENG",
+  "plan_title_jpn":"Plan Title JPN",
+  "discount":"Discount",
+  "discount_status":"Discount Status",
+  "price":"Price",
+  "planType":"Type"
+}
