@@ -310,7 +310,7 @@ const AddUserModal = ({ open, onClose, onSave, isLoading }: Props) => {
                 loading={isLoading}
                 onClick={handleSubmit(onSave, onInvalid)}
               >
-                {'ga'}
+                {'Save'}
               </Button>
             </div>
           </div>

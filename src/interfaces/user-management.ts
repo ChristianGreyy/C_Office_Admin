@@ -18,7 +18,7 @@ export type TUpdateUserData = Partial<IUserDetail>
 export type TDeleteUserData = Partial<IUserDetail> & { isSoft: boolean }
 
 export interface IUserDetail {
-  id: number
+  id?: number
   email?: string
   password?: string
   confirmPassword?: string
@@ -26,7 +26,8 @@ export interface IUserDetail {
   firstName?: string
   lastName?: string
   status?: string
-  createdAt: string
+  gender?: string
+  createdAt?: string
 }
 
 export interface IUserReport {

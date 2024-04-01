@@ -37,8 +37,12 @@ export const getUserByIdAction = createAsyncThunk(
 export const updateUserByIdAction = createAsyncThunk(
   'users/updateUserByIdAction',
   async (payload: Partial<TUpdateUserData>, { fulfillWithValue }) => {
-    const res = await userManagementAPI.updateUserById(payload)
-    return fulfillWithValue(res.data)
+    try {
+      const res = await userManagementAPI.updateUserById(payload)
+      return fulfillWithValue(res.data)
+    } catch (error) {
+      throw error
+    }
   }
 )
 

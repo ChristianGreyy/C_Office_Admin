@@ -19,7 +19,7 @@ export const userManagementAPI = {
 
   updateUserById: async (payload: Partial<TUpdateUserData>) => {
     const { id, ...passPayload } = payload
-    return await ApiClient.patch<IUserDetail, Omit<TUpdateUserData, 'id'>>(
+    return await ApiClient.put<IUserDetail, Omit<TUpdateUserData, 'id'>>(
       `/users/${id}`,
       passPayload
     )
