@@ -63,7 +63,8 @@ export const LoginPage = () => {
           content: 'Login successfully',
         })
 
-      navigate(PATH_PLAN)
+      navigate('/')
+      // navigate(PATH_PLAN)
     } catch (err) {
       const error = err as BaseResponseError
       message.error({

@@ -9,7 +9,7 @@ import {
   enumThemeMode,
   MAIN_THEME_DATA,
   MAT_SM_SCREEN_WIDTH,
-  LLC_ACCESS_TOKEN,
+  COFFICE_ACCESS_TOKEN,
   PATH_LOGIN,
   PATH_RESET_PASSWORD,
   PATH_CHANGE_PASSWORD,
@@ -43,7 +43,7 @@ export const Header = (props: IProps) => {
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    Cookies.remove(LLC_ACCESS_TOKEN)
+    Cookies.remove(COFFICE_ACCESS_TOKEN)
     sessionStorage.clear()
     dispatch(authActions.logout())
     navigate(PATH_LOGIN)

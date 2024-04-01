@@ -7,7 +7,7 @@ import Cookies from 'js-cookie'
 import { store, authActions } from 'src/redux'
 import { LogApp } from '@utils'
 import { PATH_LOGIN } from '../routes/navigation'
-import { LLC_ACCESS_TOKEN } from '@configs'
+import { COFFICE_ACCESS_TOKEN } from '@configs'
 import { BaseResponseProps } from '../interfaces'
 
 const queryString = require('query-string')
@@ -27,7 +27,7 @@ const axiosClient = axios.create({
 })
 
 axiosClient.interceptors.request.use((config: any) => {
-  const token = Cookies.get(LLC_ACCESS_TOKEN)
+  const token = Cookies.get(COFFICE_ACCESS_TOKEN)
   config.headers['Authorization'] = `Bearer ${token}`
   // config.headers["Accept-Encoding"] = `gzip, deflate, br`;
   // config.headers["x-csrf-token"] = token;
@@ -45,7 +45,7 @@ axiosClient.interceptors.response.use(
   (error: AxiosError<any, any>) => {
     if (error.response && error.response.status === 401) {
       //logout
-      Cookies.remove(LLC_ACCESS_TOKEN)
+      Cookies.remove(COFFICE_ACCESS_TOKEN)
       sessionStorage.clear()
       store.dispatch(authActions.logout())
       window.location.replace(PATH_LOGIN)

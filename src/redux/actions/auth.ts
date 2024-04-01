@@ -8,7 +8,7 @@ import {
   IResetPasswordFields,
   IVerifyEmailFields,
 } from '@interfaces'
-import { LLC_ACCESS_TOKEN } from '@configs'
+import { COFFICE_ACCESS_TOKEN } from '@configs'
 
 export const loginAction = createAsyncThunk(
   'auth/loginAction',
@@ -18,13 +18,13 @@ export const loginAction = createAsyncThunk(
   ) => {
     const { isRemember, ...passPayload } = payload
     const res = await authAPI.login(passPayload)
-
-    if (res.success) {
+    if (res.statusCode === 200) {
+      console.log(res);
       isRemember
-        ? Cookies.set(LLC_ACCESS_TOKEN, res.data.access_token.token, {
+        ? Cookies.set(COFFICE_ACCESS_TOKEN, res.data.accessToken, {
             expires: 7,
           })
-        : Cookies.set(LLC_ACCESS_TOKEN, res.data.access_token.token)
+        : Cookies.set(COFFICE_ACCESS_TOKEN, res.data.accessToken)
 
       return fulfillWithValue(res)
     }
