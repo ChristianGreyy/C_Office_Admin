@@ -45,4 +45,5 @@ export interface IEditUserData {
   firstName?: string
   lastName?: string
   status?: string
+  gender?: string
 }

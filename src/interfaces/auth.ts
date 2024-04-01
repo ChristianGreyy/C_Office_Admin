@@ -1,8 +1,5 @@
 export interface ILoginSuccessData {
-  access_token: {
-    expires?: number
-    token: string
-  }
+  accessToken: string,
   data: {
     email: string
   }

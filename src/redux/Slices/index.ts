@@ -12,7 +12,7 @@ import usersSlice from './user-management'
 import notificationsSlice from './notification-management'
 import dashboardSlice from './dashboard'
 import planReducer from './plan'
-import { LLC_ACCESS_TOKEN } from '@configs'
+import { COFFICE_ACCESS_TOKEN } from '@configs'
 
 export * from './toast'
 export * from './app'
@@ -45,7 +45,7 @@ const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
     // reset state
     state = {} as RootState
     // reset local storage
-    Cookies.remove(LLC_ACCESS_TOKEN)
+    Cookies.remove(COFFICE_ACCESS_TOKEN)
     sessionStorage.clear()
   }
   return productReducer(state, action)

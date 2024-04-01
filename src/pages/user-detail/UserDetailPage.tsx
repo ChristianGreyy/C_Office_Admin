@@ -41,6 +41,8 @@ export const UserDetailPage = () => {
       ? users?.find((user) => user.id === +userId)
       : undefined
 
+  console.log('selectedUsers', selectedUsers)
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -99,8 +101,8 @@ export const UserDetailPage = () => {
     <Card>
       {selectedUsers ? (
         <div>
-          <div className="flex gap-0.5 flex-wrap justify-between max:[640px]:flex-col">
-            <div className="w-1/3 mb-4">
+          <div className="flex gap-0.5 flex-wrap max:[640px]:flex-col">
+            <div className="w-1/4 mb-4 ml-24">
               <Controller
                 name="email"
                 control={control}
@@ -125,7 +127,7 @@ export const UserDetailPage = () => {
                 }}
               />
             </div>
-            <div className="w-1/3 mb-4">
+            <div className="w-1/4 mb-4 ml-24">
               <Controller
                 name="phone"
                 control={control}
@@ -150,7 +152,7 @@ export const UserDetailPage = () => {
                 }}
               />
             </div>
-            <div className="w-1/3 mb-4">
+            <div className="w-1/4 mb-4 ml-24">
               <Controller
                 name="firstName"
                 control={control}
@@ -175,7 +177,7 @@ export const UserDetailPage = () => {
                 }}
               />
             </div>
-            <div className="w-1/3 mb-4">
+            <div className="w-1/4 mb-4 ml-24">
               <Controller
                 name="lastName"
                 control={control}
@@ -200,7 +202,7 @@ export const UserDetailPage = () => {
                 }}
               />
             </div>
-            <div className="w-1/3 mb-4">
+            <div className="w-1/4 mb-4 ml-24">
               <Controller
                 name="status"
                 control={control}
@@ -229,35 +231,35 @@ export const UserDetailPage = () => {
                 }}
               />
             </div>
-            {/* <div className="mb-4">
-  <Controller
-    name="gender"
-    control={control}
-    render={({
-      field: { value, onChange },
-      fieldState: { error },
-    }) => {
-      return (
-        <ShareSelectInput
-          data={[
-            {
-              label: 'Male',
-              value: EUserGender.MALE,
-            },
-            {
-              label: 'Female',
-              value: EUserGender.FEMALE,
-            },
-          ]}
-          onChange={onChange}
-          label={t('common:gender')}
-          errors={error?.message}
-          value={value}
-        />
-      )
-    }}
-  />
-</div> */}
+            <div className="w-1/4 mb-4 ml-24">
+              <Controller
+                name="gender"
+                control={control}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <ShareSelectInput
+                      data={[
+                        {
+                          label: 'Male',
+                          value: EUserGender.MALE,
+                        },
+                        {
+                          label: 'Female',
+                          value: EUserGender.FEMALE,
+                        },
+                      ]}
+                      onChange={onChange}
+                      label={t('common:gender')}
+                      errors={error?.message}
+                      value={value}
+                    />
+                  )
+                }}
+              />
+            </div>
           </div>
           <div className="flex items-center justify-end w-full">
             <Button

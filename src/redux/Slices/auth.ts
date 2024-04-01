@@ -42,7 +42,7 @@ const authSlice = createSlice({
     })
     builder.addCase(loginAction.fulfilled, (state, action) => {
       state.loadings[`loginActionLoading`] = false
-      state.accessToken = action.payload?.data.access_token?.token
+      state.accessToken = action.payload?.data.accessToken
     })
     builder.addCase(loginAction.rejected, (state) => {
       state.loadings[`loginActionLoading`] = false

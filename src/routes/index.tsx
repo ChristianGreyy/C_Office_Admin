@@ -7,7 +7,7 @@ import { publicRoutes, restrictedRoutes, routes } from './routes'
 import { IRoute } from '@interfaces'
 import { AppLayout, DefaultLayout } from '@layouts'
 import { AuthRoute, PublicRoute } from '@components'
-import { LLC_ACCESS_TOKEN } from '@configs'
+import { COFFICE_ACCESS_TOKEN } from '@configs'
 import { authActions } from '@redux'
 import { PageError404 } from '../pages'
 
@@ -18,7 +18,7 @@ const Router = () => {
   console.log('Current page', location.pathname)
 
   useEffect(() => {
-    const accessToken = Cookies.get(LLC_ACCESS_TOKEN)
+    const accessToken = Cookies.get(COFFICE_ACCESS_TOKEN)
     accessToken &&
       dispatch(authActions.setAccessToken({ access_token: accessToken }))
   }, [dispatch])
