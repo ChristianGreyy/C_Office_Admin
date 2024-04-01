@@ -18,8 +18,8 @@ export const loginAction = createAsyncThunk(
   ) => {
     const { isRemember, ...passPayload } = payload
     const res = await authAPI.login(passPayload)
+    console.log('res', res);
     if (res.statusCode === 200) {
-      console.log(res);
       isRemember
         ? Cookies.set(COFFICE_ACCESS_TOKEN, res.data.accessToken, {
             expires: 7,

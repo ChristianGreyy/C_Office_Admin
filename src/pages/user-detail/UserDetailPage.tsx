@@ -58,25 +58,39 @@ export const UserDetailPage = () => {
       }),
     firstName: yup.string().required(i18next.t('error:required')),
     lastName: yup.string().required(i18next.t('error:required')),
-    status: yup.boolean().required(i18next.t('error:required')),
+    status: yup.string().required(i18next.t('error:required')),
   })
 
   const { control, handleSubmit } = useForm<IEditUserData>({
     defaultValues: {
       email: selectedUsers?.email,
+      phone: selectedUsers?.phone,
+      firstName: selectedUsers?.firstName,
+      lastName: selectedUsers?.lastName,
+      status: selectedUsers?.status,
+      gender: selectedUsers?.gender,
     },
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
   })
 
+  const onInvalid = (errors: any) => console.error(errors)
+
   const handleClickAction = handleSubmit(async (data) => {
     try {
-      await dispatch(
+      const response = await dispatch(
         updateUserByIdAction({
           id: selectedUsers?.id,
           email: data?.email,
+          phone: data?.phone,
+          firstName: data?.firstName,
+          lastName: data?.lastName,
+          status: data?.status,
+          gender: data?.gender,
         })
       ).unwrap()
+
+      console.log('response', response)
 
       message.success({
         content: 'Update user succesfully',
@@ -89,7 +103,7 @@ export const UserDetailPage = () => {
         })
       }
     }
-  })
+  }, onInvalid)
 
   useLayoutEffect(() => {
     if (!userId) {
@@ -221,7 +235,7 @@ export const UserDetailPage = () => {
                       </div>
                       <SwitchButton
                         size="small"
-                        // checked={value}
+                        checked={value === 'active'}
                         onChange={(e) => {
                           onChange(e)
                         }}
@@ -254,7 +268,7 @@ export const UserDetailPage = () => {
                       onChange={onChange}
                       label={t('common:gender')}
                       errors={error?.message}
-                      value={value}
+                      value={value ?? EUserGender.MALE}
                     />
                   )
                 }}
