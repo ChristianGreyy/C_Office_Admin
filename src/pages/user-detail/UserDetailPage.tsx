@@ -90,12 +90,11 @@ export const UserDetailPage = () => {
         })
       ).unwrap()
 
-      console.log('response', response)
-
       message.success({
         content: 'Update user succesfully',
       })
     } catch (err) {
+      console.log('err', err)
       const error = err as BaseResponseError
       if (error) {
         message.error({
@@ -237,7 +236,7 @@ export const UserDetailPage = () => {
                         size="small"
                         checked={value === 'active'}
                         onChange={(e) => {
-                          onChange(e)
+                          onChange(e === true ? 'active' : 'inactive')
                         }}
                       />
                     </>

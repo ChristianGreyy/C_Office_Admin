@@ -370,8 +370,8 @@ export enum EPlanViewType {
 }
 
 export enum EUserGender {
-  MALE = 1,
-  FEMALE = 2,
+  MALE = 'male',
+  FEMALE = 'female',
 }
 
 export enum EKeyBoardCode {

@@ -182,12 +182,6 @@ export const UserManagementPage = (props: Props) => {
               navigate(`${PATH_USER_MANAGEMENT}/edit/${id}`)
             }}
           />
-          <HeartOutlined
-            className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
-            onClick={() => {
-              navigate(`${PATH_USER_MANAGEMENT}/view-health-detail/${id}`)
-            }}
-          />
         </div>
       ),
     },
