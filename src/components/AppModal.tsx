@@ -58,7 +58,7 @@ export const AppModal = (props: IProps) => {
       $popupPosition={popupPosition}
       $open={open}
     >
-      <div className="content h-48 overflow-y-scroll" ref={modal} style={{height: '750px'}}>
+      <div className="content max-h-max overflow-y-scroll" ref={modal}>
         {haveCloseIcon && (
           <div className="modal__close" onClick={onClose}>
             {closeIcon || <XCloseIcon width={16} height={16} />}

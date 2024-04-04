@@ -13,7 +13,7 @@ export const positionManagementAPI = {
     })
   },
 
-  getPositionById: async (id: string) => {
+  getPositionById: async (id: number) => {
     return await ApiClient.get<IPositionDetail>(`/positions/${id}`)
   },
 
@@ -33,4 +33,11 @@ export const positionManagementAPI = {
     )
   },
 
+  deletePosition: async (id: number) => {
+    return await ApiClient.delete<{ data: IPositionDetail; message: string }, {}>(
+      `/positions/${id}`
+    )
+  },
+
+  
 }

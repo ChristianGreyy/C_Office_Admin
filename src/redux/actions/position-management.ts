@@ -24,7 +24,7 @@ export const getAllPositionsAction = createAsyncThunk(
 
 export const getPositionByIdAction = createAsyncThunk(
   'positions/getPositionByIdAction',
-  async (id: string) => {
+  async (id: number) => {
     try {
       const res = await positionManagementAPI.getPositionById(id)
       return res.data
@@ -51,10 +51,36 @@ export const updatePositionByIdAction = createAsyncThunk(
 
 export const addPositionAction = createAsyncThunk(
   'positions/addPositionAction',
-  async (payload: Partial<TUpdatePositionData>, { fulfillWithValue }) => {
+  async (payload: Partial<TUpdatePositionData>, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const res = await positionManagementAPI.addPosition(payload)
-      return res;
+      try {
+        const res = await positionManagementAPI.addPosition(payload)
+        if(res.statusCode !== 201) {
+          return rejectWithValue(res);
+        } 
+          return fulfillWithValue(res.data)
+      } catch (error) {
+        throw error
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+)
+
+export const deletePositionAction = createAsyncThunk(
+  'positions/deletePositionAction',
+  async (id: number, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      try {
+        const res = await positionManagementAPI.deletePosition(id)
+        if(res.statusCode !== 201) {
+          return rejectWithValue(res);
+        } 
+          return fulfillWithValue(res.data)
+      } catch (error) {
+        throw error
+      }
     } catch (error) {
       throw error
     }

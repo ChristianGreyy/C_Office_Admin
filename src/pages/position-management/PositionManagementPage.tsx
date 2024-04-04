@@ -1,4 +1,4 @@
-import { EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
 import { Card, Skeleton, message } from 'antd'
 import { format } from 'date-fns'
 import queryString from 'query-string'
@@ -11,10 +11,11 @@ import {
   INITIAL_PAGINATION_SiZE,
   PATH_POSITION_MANAGEMENT,
 } from '@configs'
-import { TUpdatePositionData } from '@interfaces'
+import { BaseResponseError, TUpdatePositionData } from '@interfaces'
 import {
   RootState,
   addPositionAction,
+  deletePositionAction,
   getAllPositionsAction,
   selectPositionsLoading,
   useAppDispatch,
@@ -22,6 +23,7 @@ import {
 import { t } from 'i18next'
 import { Button, Input, SharedTable } from 'src/common'
 import AddPositionModal from './AddPositionModal'
+import ConfirmDeleteModal from './ConfirmDeleteModal'
 
 type Props = {}
 
@@ -32,7 +34,11 @@ export const PositionManagementPage = (props: Props) => {
   const [searchValue, setSearchValue] = useState('')
   const [pageSize, setPageSize] = useState(INITIAL_PAGINATION_SiZE)
   const [isAddingPosition, setIsAddingPosition] = useState<boolean>(false)
+  const [isDeletingPosition, setIsDeletingPosition] = useState<boolean>(false)
   const [openAddPositionModal, setOpenAddPositionModal] =
+    useState<boolean>(false)
+
+  const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
     useState<boolean>(false)
   const location = useLocation()
 
@@ -44,7 +50,9 @@ export const PositionManagementPage = (props: Props) => {
     (state: RootState) => state.positions
   )
 
-  console.log(positions, positionsCurrentPage, positionsTotalItems)
+  const [selectedPositionId, setSelectedPositionId] = useState<number | null>(
+    null
+  )
 
   const data = useSelector((state: RootState) => state.positions)
 
@@ -79,6 +87,14 @@ export const PositionManagementPage = (props: Props) => {
     setOpenAddPositionModal(false)
   }
 
+  const onOpenConfirmDeleteModal = () => {
+    setOpenConfirmDeleteModal(true)
+  }
+
+  const onCloseConfirmDeleteModal = () => {
+    setOpenConfirmDeleteModal(false)
+  }
+
   const onAddPosition = async (data: TUpdatePositionData) => {
     const { ...passData } = data
     setIsAddingPosition(true)
@@ -87,20 +103,41 @@ export const PositionManagementPage = (props: Props) => {
     }
     try {
       const response = await dispatch(addPositionAction(payload)).unwrap()
-      console.log(response)
-      if (response.statusCode !== 201) {
-        message.error(response.message)
-        return
-      }
-      message.success(response.data.message)
+      message.success({
+        content: 'Create position succesfully',
+      })
       onClosePositionModal()
       getAllPositions()
-    } catch (error: any) {
-      console.log('error', error)
-      console.log('error message', error.message)
-      message.error(error.message)
+    } catch (err) {
+      const error = err as BaseResponseError
+      if (error) {
+        message.error({
+          content: error?.message,
+        })
+      }
     } finally {
       setIsAddingPosition(false)
+    }
+  }
+
+  const onDeletePosition = async () => {
+    setIsDeletingPosition(true)
+    try {
+      const response = await dispatch(deletePositionAction(selectedPositionId)).unwrap()
+      message.success({
+        content: 'Delete position succesfully',
+      })
+      onClosePositionModal()
+      getAllPositions()
+    } catch (err) {
+      const error = err as BaseResponseError
+      if (error) {
+        message.error({
+          content: error?.message,
+        })
+      }
+    } finally {
+      setIsDeletingPosition(false)
     }
   }
 
@@ -115,11 +152,11 @@ export const PositionManagementPage = (props: Props) => {
       dataIndex: 'name',
       key: 'name',
     },
-    {
-      title: 'Color',
-      dataIndex: 'color',
-      key: 'color',
-    },
+    // {
+    //   title: 'Color',
+    //   dataIndex: 'color',
+    //   key: 'color',
+    // },
     {
       title: 'Created Time',
       dataIndex: 'createdAt',
@@ -138,6 +175,13 @@ export const PositionManagementPage = (props: Props) => {
             className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
             onClick={() => {
               navigate(`${PATH_POSITION_MANAGEMENT}/edit/${id}`)
+            }}
+          />
+          <DeleteOutlined
+            className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
+            onClick={() => {
+              onOpenConfirmDeleteModal();
+              setSelectedPositionId(id);
             }}
           />
         </div>
@@ -220,6 +264,14 @@ export const PositionManagementPage = (props: Props) => {
         onClose={onClosePositionModal}
         onSave={onAddPosition}
         isLoading={isAddingPosition}
+      />
+      <ConfirmDeleteModal
+        open={openConfirmDeleteModal}
+        onClose={onCloseConfirmDeleteModal}
+        onDelete={onDeletePosition}
+        title={'Delete position'}
+        content={'Are you sure to delete this position?'}
+        isLoading={isDeletingPosition}
       />
     </Card>
   )
