@@ -33,4 +33,11 @@ export const positionManagementAPI = {
     )
   },
 
+  deletePosition: async (id: string) => {
+    return await ApiClient.delete<{ data: IPositionDetail; message: string }, {}>(
+      `/positions/${id}`
+    )
+  },
+
+  
 }

@@ -39,8 +39,6 @@ export const PositionDetailPage = () => {
       ? positions?.find((position) => position.id === +positionId)
       : undefined
 
-  console.log('selectedPositions', selectedPositions)
-
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -77,7 +75,6 @@ export const PositionDetailPage = () => {
         content: 'Update position succesfully',
       })
     } catch (err) {
-      console.log('err', err)
       const error = err as BaseResponseError
       if (error) {
         message.error({
