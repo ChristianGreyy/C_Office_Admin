@@ -9,6 +9,7 @@ import layoutReducer from './layout'
 import tierReducer from './tier'
 import userSlice from './userSlice'
 import usersSlice from './user-management'
+import positionsSlice from './position-management'
 import notificationsSlice from './notification-management'
 import dashboardSlice from './dashboard'
 import planReducer from './plan'
@@ -21,6 +22,7 @@ export * from './layout'
 export * from './tier'
 export * from './userSlice'
 export * from './user-management'
+export * from './position-management'
 export * from './notification-management'
 export * from './dashboard'
 export * from './plan'
@@ -34,6 +36,7 @@ const productReducer = combineReducers({
   user: userSlice,
   plans: planReducer,
   users: usersSlice,
+  positions: positionsSlice,
   notifications: notificationsSlice,
   dashboard: dashboardSlice,
 })
