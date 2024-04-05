@@ -1,10 +1,11 @@
 import common from './common.json'
-import login from './login.json'
 import dashboard from './dashboard.json'
 import error from './error.json'
+import level from './level.json'
+import login from './login.json'
 import plan from './plan.json'
-import user from './user.json'
 import position from './position.json'
+import user from './user.json'
 export const en = {
   common,
   login,
@@ -13,4 +14,5 @@ export const en = {
   plan,
   user,
   position,
+  level
 }

@@ -64,6 +64,7 @@ export enum enumNavKey {
   DASHBOARD = 'dashboard',
   USER_MANAGEMENT = 'user',
   POSITION_MANAGEMENT = 'position',
+  LEVEL_MANAGEMENT = 'level',
   PLAN_MANAGEMENT = 'plan',
   NOTIFICATION = 'notification',
 }

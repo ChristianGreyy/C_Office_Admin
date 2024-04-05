@@ -8,14 +8,18 @@ import {
   UserDetailPage,
   UserManagementPage
 } from '@pages'
+import { LevelDetailPage } from 'src/pages/level-detail'
+import { LevelManagementPage } from 'src/pages/level-management'
 import { PositionDetailPage } from 'src/pages/position-detail'
 import { PositionManagementPage } from 'src/pages/position-management'
 import {
   PATH_CHANGE_PASSWORD,
   PATH_DASHBOARD,
+  PATH_EDIT_LEVEL,
   PATH_EDIT_POSITION,
   PATH_EDIT_USER,
   PATH_FORGOT_PASSWORD,
+  PATH_LEVEL_MANAGEMENT,
   PATH_LOGIN,
   PATH_POSITION_MANAGEMENT,
   PATH_RESET_PASSWORD,
@@ -31,6 +35,8 @@ export const routes: Array<IRoute> = [
   { path: PATH_EDIT_USER, element: UserDetailPage },
   { path: PATH_POSITION_MANAGEMENT, element: PositionManagementPage },
   { path: PATH_EDIT_POSITION, element: PositionDetailPage },
+  { path: PATH_LEVEL_MANAGEMENT, element: LevelManagementPage },
+  { path: PATH_EDIT_LEVEL, element: LevelDetailPage },
   // { path: PATH_NOTIFICATION, element: NotificationPage },
   // { path: PATH_EDIT_NOTIFICATION, element: NotificationEditPage },
 ]

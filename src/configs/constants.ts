@@ -1,6 +1,7 @@
 import { SideBarData } from '@interfaces'
 import {
   PATH_HOME,
+  PATH_LEVEL_MANAGEMENT,
   PATH_NOTIFICATION,
   PATH_PLAN,
   PATH_POSITION_MANAGEMENT,
@@ -46,6 +47,11 @@ const SIDEBAR_DATA: SideBarData[] = [
     label: 'Position Management',
     path: PATH_POSITION_MANAGEMENT,
     pathKey: enumNavKey.POSITION_MANAGEMENT,
+  },
+  {
+    label: 'Level Management',
+    path: PATH_LEVEL_MANAGEMENT,
+    pathKey: enumNavKey.LEVEL_MANAGEMENT,
   },
   {
     label: 'Notification',
