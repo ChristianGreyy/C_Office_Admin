@@ -12,6 +12,12 @@ import { LevelDetailPage } from 'src/pages/level-detail'
 import { LevelManagementPage } from 'src/pages/level-management'
 import { PositionDetailPage } from 'src/pages/position-detail'
 import { PositionManagementPage } from 'src/pages/position-management'
+import { PriorityDetailPage } from 'src/pages/priority-detail'
+import { PriorityManagementPage } from 'src/pages/priority-management'
+import { StatusDetailPage } from 'src/pages/status-detail'
+import { StatusManagementPage } from 'src/pages/status-management'
+import { TrackerDetailPage } from 'src/pages/tracker-detail'
+import { TrackerManagementPage } from 'src/pages/tracker-management'
 import { UniversityDetailPage } from 'src/pages/university-detail'
 import { UniversityManagementPage } from 'src/pages/university-management'
 import {
@@ -19,15 +25,21 @@ import {
   PATH_DASHBOARD,
   PATH_EDIT_LEVEL,
   PATH_EDIT_POSITION,
+  PATH_EDIT_PRIORITY,
+  PATH_EDIT_STATUS,
+  PATH_EDIT_TRACKER,
   PATH_EDIT_UNIVERSITY,
   PATH_EDIT_USER,
   PATH_FORGOT_PASSWORD,
   PATH_LEVEL_MANAGEMENT,
   PATH_LOGIN,
   PATH_POSITION_MANAGEMENT,
+  PATH_PRIORITY_MANAGEMENT,
   PATH_RESET_PASSWORD,
+  PATH_STATUS_MANAGEMENT,
+  PATH_TRACKER_MANAGEMENT,
   PATH_UNIVERSITY_MANAGEMENT,
-  PATH_USER_MANAGEMENT,
+  PATH_USER_MANAGEMENT
 } from './navigation'
 export const routes: Array<IRoute> = [
   { path: PATH_RESET_PASSWORD, element: ResetPasswordPage },
@@ -43,6 +55,12 @@ export const routes: Array<IRoute> = [
   { path: PATH_EDIT_LEVEL, element: LevelDetailPage },
   { path: PATH_UNIVERSITY_MANAGEMENT, element: UniversityManagementPage },
   { path: PATH_EDIT_UNIVERSITY, element: UniversityDetailPage },
+  { path: PATH_TRACKER_MANAGEMENT, element: TrackerManagementPage },
+  { path: PATH_EDIT_TRACKER, element: TrackerDetailPage },
+  { path: PATH_STATUS_MANAGEMENT, element: StatusManagementPage },
+  { path: PATH_EDIT_STATUS, element: StatusDetailPage },
+  { path: PATH_PRIORITY_MANAGEMENT, element: PriorityManagementPage },
+  { path: PATH_EDIT_PRIORITY, element: PriorityDetailPage },
   // { path: PATH_NOTIFICATION, element: NotificationPage },
   // { path: PATH_EDIT_NOTIFICATION, element: NotificationEditPage },
 ]

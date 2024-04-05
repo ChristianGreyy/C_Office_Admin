@@ -5,7 +5,7 @@ import {
   ProductOutlined,
   ShoppingOutlined,
   StockOutlined,
-  UserOutlined
+  UserOutlined,
 } from '@ant-design/icons'
 import { enumNavKey } from '@configs'
 import { ICon } from '@interfaces'
@@ -63,8 +63,29 @@ export const NavMenuIcon = (props: IProps) => {
         )
       case enumNavKey.UNIVERSITY_MANAGEMENT:
         return (
-          <ShoppingOutlined 
-          className="mr-2"
+          <ShoppingOutlined
+            className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
+        )
+      case enumNavKey.TRACKER_MANAGEMENT:
+        return (
+          <ShoppingOutlined
+            className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
+        )
+      case enumNavKey.STATUS_MANAGEMENT:
+        return (
+          <ShoppingOutlined
+            className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
+        )
+      case enumNavKey.PRIORITY_MANAGEMENT:
+        return (
+          <ShoppingOutlined
+            className="mr-2"
             style={{ fontSize: '16px', verticalAlign: 'middle' }}
           />
         )
