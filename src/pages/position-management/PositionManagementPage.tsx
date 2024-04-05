@@ -121,14 +121,16 @@ export const PositionManagementPage = (props: Props) => {
   }
 
   const onDeletePosition = async () => {
-    setIsDeletingPosition(true)
     try {
-      const response = await dispatch(deletePositionAction(selectedPositionId?.toString())).unwrap()
-      message.success({
-        content: 'Delete position succesfully',
-      })
-      onClosePositionModal()
-      getAllPositions()
+      if(selectedPositionId) {
+        setIsDeletingPosition(true)
+        const response = await dispatch(deletePositionAction(selectedPositionId)).unwrap()
+        message.success({
+          content: 'Delete position succesfully',
+        })
+        getAllPositions()
+      }
+      onCloseConfirmDeleteModal();
     } catch (err) {
       const error = err as BaseResponseError
       if (error) {

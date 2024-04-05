@@ -42,7 +42,7 @@ const AddPositionModal = ({ open, onClose, onSave, isLoading }: Props) => {
   } = useForm<TUpdatePositionData>({
     defaultValues: {
       name: '',
-      color: '',
+      color: '#000',
     },
     resolver: zodResolver(addPositionSchema),
     mode: 'onSubmit',

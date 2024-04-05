@@ -24,7 +24,7 @@ export const getAllPositionsAction = createAsyncThunk(
 
 export const getPositionByIdAction = createAsyncThunk(
   'positions/getPositionByIdAction',
-  async (id: string) => {
+  async (id: number) => {
     try {
       const res = await positionManagementAPI.getPositionById(id)
       return res.data
@@ -70,11 +70,12 @@ export const addPositionAction = createAsyncThunk(
 
 export const deletePositionAction = createAsyncThunk(
   'positions/deletePositionAction',
-  async (id: string, { fulfillWithValue, rejectWithValue }) => {
+  async (id: number, { fulfillWithValue, rejectWithValue }) => {
     try {
       try {
         const res = await positionManagementAPI.deletePosition(id)
-        if(res.statusCode !== 201) {
+        console.log('res', res)
+        if(res.statusCode !== 200) {
           return rejectWithValue(res);
         } 
           return fulfillWithValue(res.data)

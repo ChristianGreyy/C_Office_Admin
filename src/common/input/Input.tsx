@@ -30,7 +30,7 @@ interface IInputProps extends InputProps {
 }
 
 const DEFAULT_INPUT_COLOR_STYLE = {
-  marginTop: 10,
+  // marginTop: 10,
   marginBottom: '-12px',
   padding: '5px',
   width: '50px',
