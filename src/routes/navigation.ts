@@ -27,6 +27,9 @@ export const PATH_USER_HEALTH_DETAIL = `${PATH_USER_MANAGEMENT}/view-health-deta
 // Position management
 export const PATH_POSITION_MANAGEMENT = '/position-management'
 export const PATH_EDIT_POSITION = `${PATH_POSITION_MANAGEMENT}/edit/:positionId`
+// Level management
+export const PATH_LEVEL_MANAGEMENT = '/level-management'
+export const PATH_EDIT_LEVEL = `${PATH_LEVEL_MANAGEMENT}/edit/:levelId`
 // Notification
 export const PATH_NOTIFICATION = '/notification'
 export const PATH_EDIT_NOTIFICATION = `${PATH_NOTIFICATION}/edit/:notificationId`

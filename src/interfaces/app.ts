@@ -57,6 +57,9 @@ export type RouterParams = {
   PositionDetailPage: {
     positionId: string
   },
+  LevelDetailPage: {
+    levelId: string
+  },
   UserHealthDetail: {
     userId: string
   }

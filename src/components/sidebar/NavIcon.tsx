@@ -1,17 +1,16 @@
-import { enumNavKey } from '@configs'
-import { ICon } from '@interfaces'
-import { selectLayout, useAppSelector } from '@redux'
-import { useTheme } from '@theme'
-import { LogApp } from '@utils'
-import { useLocation } from 'react-router-dom'
-import styled from 'styled-components'
 import {
   CalendarOutlined,
   HomeOutlined,
   NotificationOutlined,
-  UserOutlined,
-  ProductOutlined
+  ProductOutlined,
+  StockOutlined,
+  UserOutlined
 } from '@ant-design/icons'
+import { enumNavKey } from '@configs'
+import { ICon } from '@interfaces'
+import { useTheme } from '@theme'
+import { useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 
 interface IProps extends ICon {
   pathKey: enumNavKey
@@ -49,8 +48,17 @@ export const NavMenuIcon = (props: IProps) => {
         )
       case enumNavKey.POSITION_MANAGEMENT:
         return (
-          <ProductOutlined className="mr-2"
-          style={{ fontSize: '16px', verticalAlign: 'middle' }}/>
+          <ProductOutlined
+            className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
+        )
+      case enumNavKey.LEVEL_MANAGEMENT:
+        return (
+          <StockOutlined 
+          className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
         )
       case enumNavKey.PLAN_MANAGEMENT:
         return (

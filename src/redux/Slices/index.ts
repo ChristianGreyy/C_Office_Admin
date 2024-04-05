@@ -1,31 +1,33 @@
-import { combineReducers } from 'redux'
 import { AnyAction, Reducer } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
+import { combineReducers } from 'redux'
 
-import toastReducer from './toast'
+import { COFFICE_ACCESS_TOKEN } from '@configs'
 import appReducer from './app'
 import authReducer from './auth'
-import layoutReducer from './layout'
-import tierReducer from './tier'
-import userSlice from './userSlice'
-import usersSlice from './user-management'
-import positionsSlice from './position-management'
-import notificationsSlice from './notification-management'
 import dashboardSlice from './dashboard'
+import layoutReducer from './layout'
+import levelsSlice from './level-management'
+import notificationsSlice from './notification-management'
 import planReducer from './plan'
-import { COFFICE_ACCESS_TOKEN } from '@configs'
+import positionsSlice from './position-management'
+import tierReducer from './tier'
+import toastReducer from './toast'
+import usersSlice from './user-management'
+import userSlice from './userSlice'
 
-export * from './toast'
 export * from './app'
 export * from './auth'
-export * from './layout'
-export * from './tier'
-export * from './userSlice'
-export * from './user-management'
-export * from './position-management'
-export * from './notification-management'
 export * from './dashboard'
+export * from './layout'
+export * from './level-management'
+export * from './notification-management'
 export * from './plan'
+export * from './position-management'
+export * from './tier'
+export * from './toast'
+export * from './user-management'
+export * from './userSlice'
 
 const productReducer = combineReducers({
   toast: toastReducer,
@@ -37,6 +39,7 @@ const productReducer = combineReducers({
   plans: planReducer,
   users: usersSlice,
   positions: positionsSlice,
+  levels: levelsSlice,
   notifications: notificationsSlice,
   dashboard: dashboardSlice,
 })
