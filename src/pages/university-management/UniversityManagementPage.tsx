@@ -9,34 +9,33 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   EKeyBoardCode,
   INITIAL_PAGINATION_SiZE,
-  PATH_LEVEL_MANAGEMENT,
-  PATH_POSITION_MANAGEMENT,
+  PATH_UNIVERSITY_MANAGEMENT
 } from '@configs'
-import { BaseResponseError, TUpdateLevelData } from '@interfaces'
+import { BaseResponseError, TUpdateUniversityData } from '@interfaces'
 import {
   RootState,
-  addLevelAction,
-  deleteLevelAction,
-  getAllLevelsAction,
-  selectLevelsLoading,
+  addUniversityAction,
+  deleteUniversityAction,
+  getAllUniversitiesAction,
+  selectUniversitiesLoading,
   useAppDispatch,
 } from '@redux'
 import { t } from 'i18next'
 import { Button, Input, SharedTable } from 'src/common'
-import AddLevelModal from './AddLevelModal'
+import AddUniversityModal from './AddUniversityModal'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
 
 type Props = {}
 
-export const LevelManagementPage = (props: Props) => {
+export const UniversityManagementPage = (props: Props) => {
   const navigate = useNavigate()
   const { search } = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchValue, setSearchValue] = useState('')
   const [pageSize, setPageSize] = useState(INITIAL_PAGINATION_SiZE)
-  const [isAddingLevel, setIsAddingLevel] = useState<boolean>(false)
-  const [isDeletingLevel, setIsDeletingLevel] = useState<boolean>(false)
-  const [openAddLevelModal, setOpenAddLevelModal] =
+  const [isAddingUniversity, setIsAddingUniversity] = useState<boolean>(false)
+  const [isDeletingUniversity, setIsDeletingUniversity] = useState<boolean>(false)
+  const [openAddUniversityModal, setOpenAddUniversityModal] =
     useState<boolean>(false)
 
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
@@ -44,30 +43,30 @@ export const LevelManagementPage = (props: Props) => {
   const location = useLocation()
 
   const dispatch = useAppDispatch()
-  const getAllLevelsActionLoading = useSelector((state: RootState) =>
-    selectLevelsLoading(state, 'getAllLevelsAction')
+  const getAllUniversitiesActionLoading = useSelector((state: RootState) =>
+    selectUniversitiesLoading(state, 'getAllUniversitiesAction')
   )
-  const { levels, levelsCurrentPage, levelsTotalItems } = useSelector(
-    (state: RootState) => state.levels
+  const { universities, universitiesCurrentPage, universitiesTotalItems } = useSelector(
+    (state: RootState) => state.universities
   )
 
-  const [selectedLevelId, setSelectedLevelId] = useState<number | null>(
+  const [selectedUniversityId, setSelectedUniversityId] = useState<number | null>(
     null
   )
 
-  const data = useSelector((state: RootState) => state.levels)
+  const data = useSelector((state: RootState) => state.universities)
 
-  const getAllLevels = () => {
+  const getAllUniversities = () => {
     if (search) {
       const parsedQuery = queryString.parse(search)
-      dispatch(getAllLevelsAction(parsedQuery))
+      dispatch(getAllUniversitiesAction(parsedQuery))
       return
     }
 
-    dispatch(getAllLevelsAction())
+    dispatch(getAllUniversitiesAction())
   }
 
-  const onSearchLevels = (page?: number) => {
+  const onSearchUniversities = (page?: number) => {
     const localURlQuery: any = {
       page: page ?? 1,
       limit: INITIAL_PAGINATION_SiZE,
@@ -80,12 +79,12 @@ export const LevelManagementPage = (props: Props) => {
     setSearchParams(stringifyQuery)
   }
 
-  const onOpenLevelModal = () => {
-    setOpenAddLevelModal(true)
+  const onOpenUniversityModal = () => {
+    setOpenAddUniversityModal(true)
   }
 
-  const onCloseLevelModal = () => {
-    setOpenAddLevelModal(false)
+  const onCloseUniversityModal = () => {
+    setOpenAddUniversityModal(false)
   }
 
   const onOpenConfirmDeleteModal = () => {
@@ -96,19 +95,19 @@ export const LevelManagementPage = (props: Props) => {
     setOpenConfirmDeleteModal(false)
   }
 
-  const onAddLevel = async (data: TUpdateLevelData) => {
+  const onAddUniversity = async (data: TUpdateUniversityData) => {
     const { ...passData } = data
-    setIsAddingLevel(true)
+    setIsAddingUniversity(true)
     const payload: any = {
       ...passData,
     }
     try {
-      const response = await dispatch(addLevelAction(payload)).unwrap()
+      const response = await dispatch(addUniversityAction(payload)).unwrap()
       message.success({
-        content: 'Create level succesfully',
+        content: 'Create university succesfully',
       })
-      onCloseLevelModal()
-      getAllLevels()
+      onCloseUniversityModal()
+      getAllUniversities()
     } catch (err) {
       const error = err as BaseResponseError
       if (error) {
@@ -117,19 +116,19 @@ export const LevelManagementPage = (props: Props) => {
         })
       }
     } finally {
-      setIsAddingLevel(false)
+      setIsAddingUniversity(false)
     }
   }
 
-  const onDeleteLevel = async () => {
+  const onDeleteUniversity = async () => {
     try {
-      if(selectedLevelId) {
-        setIsDeletingLevel(true)
-        const response = await dispatch(deleteLevelAction(selectedLevelId)).unwrap()
+      if(selectedUniversityId) {
+        setIsDeletingUniversity(true)
+        const response = await dispatch(deleteUniversityAction(selectedUniversityId)).unwrap()
         message.success({
-          content: 'Delete level succesfully',
+          content: 'Delete university succesfully',
         })
-        getAllLevels()
+        getAllUniversities()
       }
       onCloseConfirmDeleteModal();
     } catch (err) {
@@ -140,7 +139,7 @@ export const LevelManagementPage = (props: Props) => {
         })
       }
     } finally {
-      setIsDeletingLevel(false)
+      setIsDeletingUniversity(false)
     }
   }
 
@@ -177,14 +176,14 @@ export const LevelManagementPage = (props: Props) => {
           <EditOutlined
             className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
             onClick={() => {
-              navigate(`${PATH_LEVEL_MANAGEMENT}/edit/${id}`)
+              navigate(`${PATH_UNIVERSITY_MANAGEMENT}/edit/${id}`)
             }}
           />
           <DeleteOutlined
             className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
             onClick={() => {
               onOpenConfirmDeleteModal();
-              setSelectedLevelId(id);
+              setSelectedUniversityId(id);
             }}
           />
         </div>
@@ -193,7 +192,7 @@ export const LevelManagementPage = (props: Props) => {
   ]
 
   useEffect(() => {
-    getAllLevels()
+    getAllUniversities()
   }, [dispatch, search])
 
   return (
@@ -201,14 +200,14 @@ export const LevelManagementPage = (props: Props) => {
       <div className="sm:pl-[0.75rem] sm:pr-[0.5rem] flex items-center sm:justify-between flex-col sm:flex-row">
         <div className="max-w-[500px] flex-1 flex-row flex">
           <Input
-            placeholder={t('common:level_management_placeholder')}
+            placeholder={t('common:university_management_placeholder')}
             value={searchValue}
             onChange={(e) => {
               setSearchValue(e.target.value)
             }}
             onKeyDown={(e) => {
               if (e.key === `${EKeyBoardCode.ENTER}`) {
-                onSearchLevels()
+                onSearchUniversities()
               }
             }}
             prefix={
@@ -226,55 +225,55 @@ export const LevelManagementPage = (props: Props) => {
             }}
             className="ml-1"
             onClick={() => {
-              onSearchLevels()
+              onSearchUniversities()
             }}
           >
             Search
           </Button>
         </div>
         <div className="flex items-center gap-[16px]">
-          <Button type="primary" onClick={onOpenLevelModal}>
-            Add new level
+          <Button type="primary" onClick={onOpenUniversityModal}>
+            Add new university
           </Button>
         </div>
       </div>
-      {getAllLevelsActionLoading ? (
+      {getAllUniversitiesActionLoading ? (
         <Skeleton paragraph={{ rows: 4 }} />
       ) : (
         <SharedTable
           columns={columns}
-          dataSource={levels?.map((level, index) => {
+          dataSource={universities?.map((university, index) => {
             return {
-              ...level,
-              key: level.id,
+              ...university,
+              key: university.id,
               no: index + 1,
-              // sickness: level?.levelData?.sickness ?? [],
-              // gender: level?.levelData?.gender,
+              // sickness: university?.universityData?.sickness ?? [],
+              // gender: university?.universityData?.gender,
             }
           })}
           paginationProps={{
-            total: !!levelsTotalItems ? +levelsTotalItems : undefined,
+            total: !!universitiesTotalItems ? +universitiesTotalItems : undefined,
             pageSize: INITIAL_PAGINATION_SiZE,
-            current: +levelsCurrentPage,
+            current: +universitiesCurrentPage,
             onChange(page) {
-              onSearchLevels(page)
+              onSearchUniversities(page)
             },
           }}
         />
       )}
-      <AddLevelModal
-        open={openAddLevelModal}
-        onClose={onCloseLevelModal}
-        onSave={onAddLevel}
-        isLoading={isAddingLevel}
+      <AddUniversityModal
+        open={openAddUniversityModal}
+        onClose={onCloseUniversityModal}
+        onSave={onAddUniversity}
+        isLoading={isAddingUniversity}
       />
       <ConfirmDeleteModal
         open={openConfirmDeleteModal}
         onClose={onCloseConfirmDeleteModal}
-        onDelete={onDeleteLevel}
-        title={'Delete level'}
-        content={'Are you sure to delete this level?'}
-        isLoading={isDeletingLevel}
+        onDelete={onDeleteUniversity}
+        title={'Delete university'}
+        content={'Are you sure to delete this university?'}
+        isLoading={isDeletingUniversity}
       />
     </Card>
   )

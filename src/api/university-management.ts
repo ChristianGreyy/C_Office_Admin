@@ -1,40 +1,40 @@
 import {
-  IFetchLevelsParams,
-  IFetchLevelsSuccessData,
-  ILevelDetail,
-  TUpdateLevelData,
+  IFetchUniversitiesParams,
+  IFetchUniversitiesSuccessData,
+  IUniversityDetail,
+  TUpdateUniversityData,
 } from '@interfaces'
 import { ApiClient } from './axiosClient'
 
 export const universityManagementAPI = {
-  getAllLevels: async (params?: IFetchLevelsParams) => {
-    return await ApiClient.get<IFetchLevelsSuccessData>('/universities', {
+  getAllUniversities: async (params?: IFetchUniversitiesParams) => {
+    return await ApiClient.get<IFetchUniversitiesSuccessData>('/universities', {
       params,
     })
   },
 
-  getLevelById: async (id: number) => {
-    return await ApiClient.get<ILevelDetail>(`/universities/${id}`)
+  getUniversityById: async (id: number) => {
+    return await ApiClient.get<IUniversityDetail>(`/universities/${id}`)
   },
 
-  updateLevelById: async (payload: Partial<TUpdateLevelData>) => {
+  updateUniversityById: async (payload: Partial<TUpdateUniversityData>) => {
     const { id, ...passPayload } = payload
-    return await ApiClient.put<ILevelDetail, Omit<TUpdateLevelData, 'id'>>(
+    return await ApiClient.put<IUniversityDetail, Omit<TUpdateUniversityData, 'id'>>(
       `/universities/${id}`,
       passPayload
     )
   },
 
-  addLevel: async (payload: Partial<TUpdateLevelData>) => {
+  addUniversity: async (payload: Partial<TUpdateUniversityData>) => {
     const { id, ...passPayload } = payload
-    return await ApiClient.post<{ data: ILevelDetail; message: string }, {}>(
+    return await ApiClient.post<{ data: IUniversityDetail; message: string }, {}>(
       `/universities`,
       passPayload
     )
   },
 
-  deleteLevel: async (id: number) => {
-    return await ApiClient.delete<{ data: ILevelDetail; message: string }, {}>(
+  deleteUniversity: async (id: number) => {
+    return await ApiClient.delete<{ data: IUniversityDetail; message: string }, {}>(
       `/universities/${id}`
     )
   },

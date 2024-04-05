@@ -9,24 +9,24 @@ import { useNavigate, useParams } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { SICKNESS_OPTIONS } from '@configs'
-import { BaseResponseError, IEditLevelData, RouterParams } from '@interfaces'
+import { BaseResponseError, IEditUniversityData, RouterParams } from '@interfaces'
 import {
   RootState,
-  updateLevelByIdAction,
+  updateUniversityByIdAction,
   useAppDispatch,
   useAppSelector,
 } from '@redux'
 import { Button, Input } from 'src/common'
 
-export const LevelDetailPage = () => {
+export const UniversityDetailPage = () => {
   const navigate = useNavigate()
-  const { t } = useTranslation(['common', 'level', 'error'])
+  const { t } = useTranslation(['common', 'university', 'error'])
 
-  const { levelId } = useParams<RouterParams['LevelDetailPage']>()
+  const { universityId } = useParams<RouterParams['UniversityDetailPage']>()
   const dispatch = useAppDispatch()
-  const { levels } = useAppSelector((state: RootState) => state.levels)
-  const updateLevelByIdActionLoading = useAppSelector(
-    (state: RootState) => state.levels.loadings['updateLevelByIdActionLoading']
+  const { universities } = useAppSelector((state: RootState) => state.universities)
+  const updateUniversityByIdActionLoading = useAppSelector(
+    (state: RootState) => state.universities.loadings['updateUniversityByIdActionLoading']
   )
 
   const data = SICKNESS_OPTIONS.map((item) => ({
@@ -34,11 +34,11 @@ export const LevelDetailPage = () => {
     value: item,
   }))
 
-  console.log('levels', levels)
+  console.log('universities', universities)
 
-  const selectedLevels =
-    levels && levels.length && levelId
-      ? levels?.find((level) => level.id === +levelId)
+  const selectedUniversities =
+    universities && universities.length && universityId
+      ? universities?.find((university) => university.id === +universityId)
       : undefined
 
   const schema = yup.object().shape({
@@ -52,10 +52,10 @@ export const LevelDetailPage = () => {
       .required(i18next.t('error:required'))
   })
 
-  const { control, handleSubmit } = useForm<IEditLevelData>({
+  const { control, handleSubmit } = useForm<IEditUniversityData>({
     defaultValues: {
-      name: selectedLevels?.name,
-      color: selectedLevels?.color,
+      name: selectedUniversities?.name,
+      color: selectedUniversities?.color,
     },
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
@@ -66,15 +66,15 @@ export const LevelDetailPage = () => {
   const handleClickAction = handleSubmit(async (data) => {
     try {
       const response = await dispatch(
-        updateLevelByIdAction({
-          id: selectedLevels?.id,
+        updateUniversityByIdAction({
+          id: selectedUniversities?.id,
           name: data?.name,
           color: data?.color,
         })
       ).unwrap()
 
       message.success({
-        content: 'Update level succesfully',
+        content: 'Update university succesfully',
       })
     } catch (err) {
       const error = err as BaseResponseError
@@ -87,14 +87,14 @@ export const LevelDetailPage = () => {
   }, onInvalid)
 
   useLayoutEffect(() => {
-    if (!levelId) {
+    if (!universityId) {
       navigate('/404')
     }
-  }, [levelId])
+  }, [universityId])
 
   return (
     <Card>
-      {selectedLevels ? (
+      {selectedUniversities ? (
         <div>
           <div className="flex gap-0.5 flex-wrap max:[640px]:flex-col">
             <div className="w-1/4 mb-4 ml-24">
@@ -108,7 +108,7 @@ export const LevelDetailPage = () => {
                   return (
                     <Input
                       alignment="col"
-                      label={t('level:name')}
+                      label={t('university:name')}
                       name="name"
                       className="input"
                       value={value}
@@ -133,7 +133,7 @@ export const LevelDetailPage = () => {
                   return (
                     <Input
                       alignment="col"
-                      label={t('level:color')}
+                      label={t('university:color')}
                       name="color"
                       className="input"
                       value={value}
@@ -153,7 +153,7 @@ export const LevelDetailPage = () => {
               type="primary"
               className="mr-5"
               onClick={handleClickAction}
-              loading={updateLevelByIdActionLoading}
+              loading={updateUniversityByIdActionLoading}
             >
               Save
             </Button>
@@ -168,7 +168,7 @@ export const LevelDetailPage = () => {
           </div>
         </div>
       ) : (
-        <>No level found</>
+        <>No university found</>
       )}
     </Card>
   )

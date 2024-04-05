@@ -5,6 +5,7 @@ import level from './level.json'
 import login from './login.json'
 import plan from './plan.json'
 import position from './position.json'
+import university from './university.json'
 import user from './user.json'
 export const en = {
   common,
@@ -14,5 +15,6 @@ export const en = {
   plan,
   user,
   position,
-  level
+  level,
+  university,
 }

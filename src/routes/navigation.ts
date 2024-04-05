@@ -30,6 +30,9 @@ export const PATH_EDIT_POSITION = `${PATH_POSITION_MANAGEMENT}/edit/:positionId`
 // Level management
 export const PATH_LEVEL_MANAGEMENT = '/level-management'
 export const PATH_EDIT_LEVEL = `${PATH_LEVEL_MANAGEMENT}/edit/:levelId`
+// University management
+export const PATH_UNIVERSITY_MANAGEMENT = '/university-management'
+export const PATH_EDIT_UNIVERSITY = `${PATH_UNIVERSITY_MANAGEMENT}/edit/:universityId`
 // Notification
 export const PATH_NOTIFICATION = '/notification'
 export const PATH_EDIT_NOTIFICATION = `${PATH_NOTIFICATION}/edit/:notificationId`

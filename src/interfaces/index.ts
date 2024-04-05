@@ -23,6 +23,7 @@ export * from './stores'
 export * from './theme'
 export * from './tier'
 export * from './toast'
+export * from './university-management'
 export * from './user'
 export * from './user-management'
 

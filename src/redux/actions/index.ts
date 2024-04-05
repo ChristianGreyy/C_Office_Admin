@@ -5,5 +5,6 @@ export * from './notification-management'
 export * from './plan'
 export * from './position-management'
 export * from './tier'
+export * from './university-management'
 export * from './user-management'
 
