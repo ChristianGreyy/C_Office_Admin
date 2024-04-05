@@ -63,6 +63,7 @@ export enum enumCashbackType {
 export enum enumNavKey {
   DASHBOARD = 'dashboard',
   USER_MANAGEMENT = 'user',
+  POSITION_MANAGEMENT = 'position',
   PLAN_MANAGEMENT = 'plan',
   NOTIFICATION = 'notification',
 }

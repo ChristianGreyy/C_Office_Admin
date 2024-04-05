@@ -72,17 +72,6 @@ export const UserManagementPage = (props: Props) => {
     setSearchParams(stringifyQuery)
   }
 
-  const onDowloadFile = async () => {
-    try {
-      setIsDowloading(true)
-      // await dowloadFile(`users/export${search}`)
-    } catch (error: any) {
-      message.error(error.message || 'Oops, something went wrong')
-    } finally {
-      setIsDowloading(false)
-    }
-  }
-
   const onOpenUserModal = () => {
     setOpenAddUserModal(true)
   }

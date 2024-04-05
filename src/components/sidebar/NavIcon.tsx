@@ -1,27 +1,28 @@
-import { enumNavKey } from "@configs";
-import { ICon } from "@interfaces";
-import { selectLayout, useAppSelector } from "@redux";
-import { useTheme } from "@theme";
-import { LogApp } from "@utils";
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
+import { enumNavKey } from '@configs'
+import { ICon } from '@interfaces'
+import { selectLayout, useAppSelector } from '@redux'
+import { useTheme } from '@theme'
+import { LogApp } from '@utils'
+import { useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   CalendarOutlined,
   HomeOutlined,
   NotificationOutlined,
   UserOutlined,
-} from "@ant-design/icons";
+  ProductOutlined
+} from '@ant-design/icons'
 
 interface IProps extends ICon {
-  pathKey: enumNavKey;
+  pathKey: enumNavKey
 }
 
 export const NavMenuIcon = (props: IProps) => {
-  const { pathKey } = props;
+  const { pathKey } = props
 
-  const location = useLocation();
+  const location = useLocation()
 
-  const { theme } = useTheme();
+  const { theme } = useTheme()
 
   const genIcon = () => {
     switch (pathKey) {
@@ -29,9 +30,9 @@ export const NavMenuIcon = (props: IProps) => {
         return (
           <HomeOutlined
             className="mr-2"
-            style={{ fontSize: "16px", verticalAlign: "middle" }}
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
           />
-        );
+        )
       // case enumNavKey.LOYALTY_SETTING:
       //   return (
       //     <LoyaltyMenuIcon
@@ -43,24 +44,29 @@ export const NavMenuIcon = (props: IProps) => {
         return (
           <UserOutlined
             className="mr-2"
-            style={{ fontSize: "16px", verticalAlign: "middle" }}
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
           />
-        );
+        )
+      case enumNavKey.POSITION_MANAGEMENT:
+        return (
+          <ProductOutlined className="mr-2"
+          style={{ fontSize: '16px', verticalAlign: 'middle' }}/>
+        )
       case enumNavKey.PLAN_MANAGEMENT:
         return (
           <CalendarOutlined
             className="mr-2"
-            style={{ fontSize: "16px", verticalAlign: "middle" }}
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
           />
-        );
+        )
 
       case enumNavKey.NOTIFICATION:
         return (
           <NotificationOutlined
             className="mr-2"
-            style={{ fontSize: "16px", verticalAlign: "middle" }}
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
           />
-        );
+        )
       // case enumNavKey.CASHBACK_RULES:
       //   return <CashbackRuleMenuIcon {...props} />;
       // case enumNavKey.BIRTHDAY_SPECIAL:
@@ -98,13 +104,13 @@ export const NavMenuIcon = (props: IProps) => {
       //     />
       //   );
       default:
-        return <></>;
+        return <></>
     }
-  };
+  }
 
-  return <>{genIcon()}</>;
-};
+  return <>{genIcon()}</>
+}
 
 const StyledNavMenuIcon = styled.div<{
-  $appTheme?: string;
-}>``;
+  $appTheme?: string
+}>``

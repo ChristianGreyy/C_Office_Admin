@@ -3,6 +3,7 @@ import {
   PATH_HOME,
   PATH_NOTIFICATION,
   PATH_PLAN,
+  PATH_POSITION_MANAGEMENT,
   PATH_USER_MANAGEMENT,
 } from './../routes/navigation'
 import {
@@ -40,6 +41,11 @@ const SIDEBAR_DATA: SideBarData[] = [
     label: 'User Management',
     path: PATH_USER_MANAGEMENT,
     pathKey: enumNavKey.USER_MANAGEMENT,
+  },
+  {
+    label: 'Position Management',
+    path: PATH_POSITION_MANAGEMENT,
+    pathKey: enumNavKey.POSITION_MANAGEMENT,
   },
   {
     label: 'Notification',

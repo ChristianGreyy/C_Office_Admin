@@ -24,6 +24,9 @@ export const PATH_DETAIL_PLAN = '/plan-managament/:type'
 export const PATH_USER_MANAGEMENT = '/user-management'
 export const PATH_EDIT_USER = `${PATH_USER_MANAGEMENT}/edit/:userId`
 export const PATH_USER_HEALTH_DETAIL = `${PATH_USER_MANAGEMENT}/view-health-detail/:userId`
+// Position management
+export const PATH_POSITION_MANAGEMENT = '/position-management'
+export const PATH_EDIT_POSITION = `${PATH_POSITION_MANAGEMENT}/edit/:positionId`
 // Notification
 export const PATH_NOTIFICATION = '/notification'
 export const PATH_EDIT_NOTIFICATION = `${PATH_NOTIFICATION}/edit/:notificationId`
