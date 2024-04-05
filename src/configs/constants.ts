@@ -5,6 +5,7 @@ import {
   PATH_NOTIFICATION,
   PATH_PLAN,
   PATH_POSITION_MANAGEMENT,
+  PATH_UNIVERSITY_MANAGEMENT,
   PATH_USER_MANAGEMENT,
 } from './../routes/navigation'
 import {
@@ -52,6 +53,11 @@ const SIDEBAR_DATA: SideBarData[] = [
     label: 'Level Management',
     path: PATH_LEVEL_MANAGEMENT,
     pathKey: enumNavKey.LEVEL_MANAGEMENT,
+  },
+  {
+    label: 'University Management',
+    path: PATH_UNIVERSITY_MANAGEMENT,
+    pathKey: enumNavKey.UNIVERSITY_MANAGEMENT,
   },
   {
     label: 'Notification',

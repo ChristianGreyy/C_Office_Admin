@@ -6,24 +6,28 @@ import {
   LoginPage,
   ResetPasswordPage,
   UserDetailPage,
-  UserManagementPage
+  UserManagementPage,
 } from '@pages'
 import { LevelDetailPage } from 'src/pages/level-detail'
 import { LevelManagementPage } from 'src/pages/level-management'
 import { PositionDetailPage } from 'src/pages/position-detail'
 import { PositionManagementPage } from 'src/pages/position-management'
+import { UniversityDetailPage } from 'src/pages/university-detail'
+import { UniversityManagementPage } from 'src/pages/university-management'
 import {
   PATH_CHANGE_PASSWORD,
   PATH_DASHBOARD,
   PATH_EDIT_LEVEL,
   PATH_EDIT_POSITION,
+  PATH_EDIT_UNIVERSITY,
   PATH_EDIT_USER,
   PATH_FORGOT_PASSWORD,
   PATH_LEVEL_MANAGEMENT,
   PATH_LOGIN,
   PATH_POSITION_MANAGEMENT,
   PATH_RESET_PASSWORD,
-  PATH_USER_MANAGEMENT
+  PATH_UNIVERSITY_MANAGEMENT,
+  PATH_USER_MANAGEMENT,
 } from './navigation'
 export const routes: Array<IRoute> = [
   { path: PATH_RESET_PASSWORD, element: ResetPasswordPage },
@@ -37,6 +41,8 @@ export const routes: Array<IRoute> = [
   { path: PATH_EDIT_POSITION, element: PositionDetailPage },
   { path: PATH_LEVEL_MANAGEMENT, element: LevelManagementPage },
   { path: PATH_EDIT_LEVEL, element: LevelDetailPage },
+  { path: PATH_UNIVERSITY_MANAGEMENT, element: UniversityManagementPage },
+  { path: PATH_EDIT_UNIVERSITY, element: UniversityDetailPage },
   // { path: PATH_NOTIFICATION, element: NotificationPage },
   // { path: PATH_EDIT_NOTIFICATION, element: NotificationEditPage },
 ]

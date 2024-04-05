@@ -3,6 +3,7 @@ import {
   HomeOutlined,
   NotificationOutlined,
   ProductOutlined,
+  ShoppingOutlined,
   StockOutlined,
   UserOutlined
 } from '@ant-design/icons'
@@ -55,7 +56,14 @@ export const NavMenuIcon = (props: IProps) => {
         )
       case enumNavKey.LEVEL_MANAGEMENT:
         return (
-          <StockOutlined 
+          <StockOutlined
+            className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
+        )
+      case enumNavKey.UNIVERSITY_MANAGEMENT:
+        return (
+          <ShoppingOutlined 
           className="mr-2"
             style={{ fontSize: '16px', verticalAlign: 'middle' }}
           />
