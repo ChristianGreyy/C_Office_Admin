@@ -33,6 +33,16 @@ export const PATH_EDIT_LEVEL = `${PATH_LEVEL_MANAGEMENT}/edit/:levelId`
 // University management
 export const PATH_UNIVERSITY_MANAGEMENT = '/university-management'
 export const PATH_EDIT_UNIVERSITY = `${PATH_UNIVERSITY_MANAGEMENT}/edit/:universityId`
+// Priority management
+export const PATH_PRIORITY_MANAGEMENT = '/priority-management'
+export const PATH_EDIT_PRIORITY = `${PATH_PRIORITY_MANAGEMENT}/edit/:priorityId`
+// Tracker management
+export const PATH_TRACKER_MANAGEMENT = '/tracker-management'
+export const PATH_EDIT_TRACKER = `${PATH_TRACKER_MANAGEMENT}/edit/:trackerId`
+// Status management
+export const PATH_STATUS_MANAGEMENT = '/status-management'
+export const PATH_EDIT_STATUS = `${PATH_STATUS_MANAGEMENT}/edit/:statusId`
 // Notification
 export const PATH_NOTIFICATION = '/notification'
 export const PATH_EDIT_NOTIFICATION = `${PATH_NOTIFICATION}/edit/:notificationId`
+

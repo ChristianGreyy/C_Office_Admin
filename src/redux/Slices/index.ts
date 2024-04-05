@@ -11,8 +11,11 @@ import levelsSlice from './level-management'
 import notificationsSlice from './notification-management'
 import planReducer from './plan'
 import positionsSlice from './position-management'
+import prioritiesSlice from './priority-management'
+import statusSlice from './status-management'
 import tierReducer from './tier'
 import toastReducer from './toast'
+import trackersSlice from './tracker-management'
 import universitiesSlice from './university-management'
 import usersSlice from './user-management'
 import userSlice from './userSlice'
@@ -25,8 +28,11 @@ export * from './level-management'
 export * from './notification-management'
 export * from './plan'
 export * from './position-management'
+export * from './priority-management'
+export * from './status-management'
 export * from './tier'
 export * from './toast'
+export * from './tracker-management'
 export * from './university-management'
 export * from './user-management'
 export * from './userSlice'
@@ -41,7 +47,10 @@ const productReducer = combineReducers({
   plans: planReducer,
   users: usersSlice,
   positions: positionsSlice,
+  trackers: trackersSlice,
+  priorities: prioritiesSlice,
   levels: levelsSlice,
+  status: statusSlice,
   universities: universitiesSlice,
   notifications: notificationsSlice,
   dashboard: dashboardSlice,

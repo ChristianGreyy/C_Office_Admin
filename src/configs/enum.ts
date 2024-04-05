@@ -66,6 +66,9 @@ export enum enumNavKey {
   POSITION_MANAGEMENT = 'position',
   LEVEL_MANAGEMENT = 'level',
   UNIVERSITY_MANAGEMENT = 'university',
+  TRACKER_MANAGEMENT = 'tracker',
+  STATUS_MANAGEMENT = 'status',
+  PRIORITY_MANAGEMENT = 'priority',
   PLAN_MANAGEMENT = 'plan',
   NOTIFICATION = 'notification',
 }

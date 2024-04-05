@@ -63,6 +63,15 @@ export type RouterParams = {
   UniversityDetailPage: {
     universityId: string
   }
+  TrackerDetailPage: {
+    trackerId: string
+  },
+  StatusDetailPage: {
+    statusId: string
+  },
+  PriorityDetailPage: {
+    priorityId: string
+  },
   UserHealthDetail: {
     userId: string
   }
