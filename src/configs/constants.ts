@@ -1,10 +1,12 @@
 import { SideBarData } from '@interfaces'
 import {
+  PATH_CHAT_CHANNEL,
   PATH_HOME,
   PATH_LEVEL_MANAGEMENT,
   PATH_NOTIFICATION,
   PATH_POSITION_MANAGEMENT,
   PATH_PRIORITY_MANAGEMENT,
+  PATH_STAFF_AND_ROLE_MANAGEMENT,
   PATH_STATUS_MANAGEMENT,
   PATH_TRACKER_MANAGEMENT,
   PATH_UNIVERSITY_MANAGEMENT,
@@ -80,6 +82,23 @@ const SIDEBAR_DATA: SideBarData[] = [
     label: 'Notification',
     path: PATH_NOTIFICATION,
     pathKey: enumNavKey.NOTIFICATION,
+  },
+  {
+    label: 'Internal',
+    path: PATH_STAFF_AND_ROLE_MANAGEMENT,
+    pathKey: enumNavKey.CHAT_CHANNEL,
+    subItems: [
+      {
+        label: 'Chat channel',
+        path: PATH_CHAT_CHANNEL,
+        pathKey: enumNavKey.CHAT_CHANNEL,
+      },
+      {
+        label: 'Staff and role management',
+        path: PATH_STAFF_AND_ROLE_MANAGEMENT,
+        pathKey: enumNavKey.STAFF_AND_ROLE_MANAGEMENT,
+      },
+    ],
   },
 ]
 
@@ -411,3 +430,16 @@ export const SICKNESS_OPTIONS = [
   'Cardiomyopathy',
   'Other',
 ]
+
+export enum EManageRoleTabs {
+  STAFF_MANAGEMENT = 'Staff management',
+  ROLE_MANAGEMENT = 'Role management',
+}
+
+export const DEFAULT_USER_AVATAR =
+  'https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg'
+
+export const REGEX_EMAIL =
+  /^[a-zA-Z0-9._%+-]+@(?!.*\.\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+export const ROLE_DEFAULT_ID = 2

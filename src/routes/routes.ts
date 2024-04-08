@@ -20,6 +20,8 @@ import { TrackerDetailPage } from 'src/pages/tracker-detail'
 import { TrackerManagementPage } from 'src/pages/tracker-management'
 import { UniversityDetailPage } from 'src/pages/university-detail'
 import { UniversityManagementPage } from 'src/pages/university-management'
+import { StaffAndRoleManagementPage } from 'src/pages/staff-and-role-management'
+
 import {
   PATH_CHANGE_PASSWORD,
   PATH_DASHBOARD,
@@ -36,6 +38,7 @@ import {
   PATH_POSITION_MANAGEMENT,
   PATH_PRIORITY_MANAGEMENT,
   PATH_RESET_PASSWORD,
+  PATH_STAFF_AND_ROLE_MANAGEMENT,
   PATH_STATUS_MANAGEMENT,
   PATH_TRACKER_MANAGEMENT,
   PATH_UNIVERSITY_MANAGEMENT,
@@ -61,6 +64,7 @@ export const routes: Array<IRoute> = [
   { path: PATH_EDIT_STATUS, element: StatusDetailPage },
   { path: PATH_PRIORITY_MANAGEMENT, element: PriorityManagementPage },
   { path: PATH_EDIT_PRIORITY, element: PriorityDetailPage },
+  { path: PATH_STAFF_AND_ROLE_MANAGEMENT, element: StaffAndRoleManagementPage },
   // { path: PATH_NOTIFICATION, element: NotificationPage },
   // { path: PATH_EDIT_NOTIFICATION, element: NotificationEditPage },
 ]

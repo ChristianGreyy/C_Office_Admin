@@ -1,5 +1,6 @@
 import { EUserGender } from '@configs'
 import { IGetParams } from './app'
+import { IRole } from './role-management'
 
 export interface IFetchUsersParams extends IGetParams {
   sortOption?: string
@@ -19,14 +20,16 @@ export type TDeleteUserData = Partial<IUserDetail> & { isSoft: boolean }
 
 export interface IUserDetail {
   id?: number
-  email?: string
-  password?: string
-  confirmPassword?: string
-  phone?: string
-  firstName?: string
-  lastName?: string
+  email: string
+  roleId: number
+  password: string
+  confirmPassword: string
+  phone: string
+  firstName: string
+  lastName: string
   status?: string
   gender?: string
+  role?: IRole
   createdAt?: string
 }
 

@@ -7,7 +7,7 @@ import { COFFICE_ACCESS_TOKEN, PATH_LOGIN } from '@configs'
 export const AuthRoute = () => {
   const accessToken = Cookies.get(COFFICE_ACCESS_TOKEN)
 
-  return <Outlet />;
+  // return <Outlet />;
 
-  // return accessToken ? <Outlet /> : <Navigate to={PATH_LOGIN} />
+  return accessToken ? <Outlet /> : <Navigate to={PATH_LOGIN} />
 }
