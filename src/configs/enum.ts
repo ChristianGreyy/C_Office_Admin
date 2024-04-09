@@ -71,6 +71,8 @@ export enum enumNavKey {
   PRIORITY_MANAGEMENT = 'priority',
   PLAN_MANAGEMENT = 'plan',
   NOTIFICATION = 'notification',
+  CHAT_CHANNEL = 'chat',
+  STAFF_AND_ROLE_MANAGEMENT = 'role',
 }
 
 export enum enumMainNavKey {
@@ -166,4 +168,10 @@ export enum enumStatusCode {
   INVALID_LOGIN_LINK = 621,
   ITEM_NOT_FOUND = 622,
   SEND_EMAIL_FAIL = 623,
+}
+
+
+export enum EUserStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
 }

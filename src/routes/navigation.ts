@@ -45,4 +45,8 @@ export const PATH_EDIT_STATUS = `${PATH_STATUS_MANAGEMENT}/edit/:statusId`
 // Notification
 export const PATH_NOTIFICATION = '/notification'
 export const PATH_EDIT_NOTIFICATION = `${PATH_NOTIFICATION}/edit/:notificationId`
-
+// Chat channel
+export const PATH_CHAT_CHANNEL = '/chat-channel'
+// Manage role
+export const PATH_MANAGE_ROLE = '/manage-role'
+export const PATH_STAFF_AND_ROLE_MANAGEMENT = '/staff-and-role-management'

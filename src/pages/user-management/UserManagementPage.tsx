@@ -97,8 +97,6 @@ export const UserManagementPage = (props: Props) => {
       onCloseUserModal()
       getAllUsers()
     } catch (error: any) {
-      console.log('error', error)
-      console.log('error message', error.message)
       message.error(error.message)
     } finally {
       setIsAddingUser(false)

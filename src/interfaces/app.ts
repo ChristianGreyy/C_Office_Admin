@@ -42,9 +42,14 @@ export interface SideBarData {
   label: string
   path: string
   pathKey: enumNavKey
-  subItems?: [
-    { label: string; path: string; pathKey: enumNavKey; subOptions?: any[] }
-  ]
+  subItems?: SubSideBar[]
+}
+
+export interface SubSideBar {
+  label: string
+  path: string
+  pathKey: enumNavKey
+  subOptions?: any[]
 }
 
 export type RouterParams = {
