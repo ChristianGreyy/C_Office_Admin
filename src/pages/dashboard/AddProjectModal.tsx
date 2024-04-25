@@ -6,52 +6,46 @@ import { z } from 'zod'
 import { Button, Input } from 'src/common'
 import { AppModal } from 'src/components/AppModal'
 import { XCloseIcon } from 'src/components/Icon'
-import { TUpdateStatusData } from 'src/interfaces'
+import { TUpdateProjectData } from 'src/interfaces'
 import { useAppDispatch } from 'src/redux'
+import { mapValues } from 'lodash'
 
 type Props = {
   open: boolean
   isLoading?: boolean
   onClose: () => void
-  onSave: (data: TUpdateStatusData) => Promise<void>
+  onSave: (data: TUpdateProjectData) => Promise<void>
 }
 
-export const addStatusSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .nonempty({
-      message: t('error:required') as string,
-    }),
-  slug: z
-    .string()
-    .trim()
-    .nonempty({
-      message: t('error:required') as string,
-    }),
-  color: z
-    .string()
-    .trim()
-    .nonempty({
-      message: t('error:required') as string,
-    })
-    .transform((e) => (e === '' ? undefined : e)),
+export const addProjectSchema = z.object({
+  name: z.string().trim(),
+  // .nonempty({
+  //   message: t('error:required') as string,
+  // }),
+  kickOffDate: z.string().trim(),
+  // .nonempty({
+  //   message: t('error:required') as string,
+  // }),
+  deadline: z.string().trim(),
+  // .nonempty({
+  //   message: t('error:required') as string,
+  // }),
 })
 
-const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
+const AddProjectModal = ({ open, onClose, onSave, isLoading }: Props) => {
   const {
     control,
     handleSubmit,
     setValue,
     reset,
     formState: { errors },
-  } = useForm<TUpdateStatusData>({
+  } = useForm<TUpdateProjectData>({
     defaultValues: {
       name: '',
-      slug: '',
-      color: '#000',
+      kickOffDate: '',
+      deadline: '',
     },
-    resolver: zodResolver(addStatusSchema),
+    resolver: zodResolver(addProjectSchema),
     mode: 'onSubmit',
     reValidateMode: 'onChange',
   })
@@ -64,7 +58,7 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
     <AppModal open={open} onClose={onClose}>
       <div className="flex items-center justify-between ">
         <div>
-          <h1 className="m-0 text-[20px]">Add new status</h1>
+          <h1 className="m-0 text-[20px]">Add new project</h1>
         </div>
         <div className="hover:opacity-75 cursor-pointer">
           <XCloseIcon width={16} height={16} onClick={onClose} />
@@ -83,7 +77,7 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
                 return (
                   <Input
                     alignment="col"
-                    label={t('status:name') as string}
+                    label={t('project:name') as string}
                     name="name"
                     className="input "
                     value={value}
@@ -97,7 +91,7 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
           </div>
           <div className="mt-[16px]">
             <Controller
-              name="slug"
+              name="kickOffDate"
               control={control}
               render={({
                 field: { value, onChange },
@@ -106,12 +100,12 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
                 return (
                   <Input
                     alignment="col"
-                    label={t('status:slug') as string}
-                    name="slug"
-                    className="input"
+                    label={t('project:kickOffDate') as string}
+                    name="kickOffDate"
+                    className="date"
                     value={value}
-                    type="text"
-                    onChange={onChange}
+                    type="date"
+                    onChangeDate={onChange}
                     errors={error?.message}
                   />
                 )
@@ -120,7 +114,7 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
           </div>
           <div className="mt-[16px]">
             <Controller
-              name="color"
+              name="deadline"
               control={control}
               render={({
                 field: { value, onChange },
@@ -129,13 +123,12 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
                 return (
                   <Input
                     alignment="col"
-                    label={t('status:color') as string}
-                    name="color"
-                    haveShowPassIcon={true}
-                    className="input"
+                    label={t('project:deadline') as string}
+                    name="deadline"
+                    className="input "
                     value={value}
-                    type="color"
-                    onChange={onChange}
+                    type="date"
+                    onChangeDate={onChange}
                     errors={error?.message}
                   />
                 )
@@ -170,4 +163,4 @@ const AddStatusModal = ({ open, onClose, onSave, isLoading }: Props) => {
   )
 }
 
-export default AddStatusModal
+export default AddProjectModal

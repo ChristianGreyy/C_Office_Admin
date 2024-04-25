@@ -22,7 +22,13 @@ export const addPrioritySchema = z.object({
     .trim()
     .nonempty({
       message: t('error:required') as string,
-    })
+    }),
+  slug: z
+    .string()
+    .trim()
+    .nonempty({
+      message: t('error:required') as string,
+    }),
 })
 
 const AddPriorityModal = ({ open, onClose, onSave, isLoading }: Props) => {
@@ -35,6 +41,7 @@ const AddPriorityModal = ({ open, onClose, onSave, isLoading }: Props) => {
   } = useForm<TUpdatePriorityData>({
     defaultValues: {
       name: '',
+      slug: '',
     },
     resolver: zodResolver(addPrioritySchema),
     mode: 'onSubmit',
@@ -70,6 +77,29 @@ const AddPriorityModal = ({ open, onClose, onSave, isLoading }: Props) => {
                     alignment="col"
                     label={t('priority:name') as string}
                     name="name"
+                    className="input "
+                    value={value}
+                    type="text"
+                    onChange={onChange}
+                    errors={error?.message}
+                  />
+                )
+              }}
+            />
+          </div>
+          <div className="mt-[16px]">
+            <Controller
+              name="slug"
+              control={control}
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => {
+                return (
+                  <Input
+                    alignment="col"
+                    label={t('priority:slug') as string}
+                    name="slug"
                     className="input "
                     value={value}
                     type="text"

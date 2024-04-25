@@ -26,7 +26,8 @@ export const TrackerDetailPage = () => {
   const dispatch = useAppDispatch()
   const { trackers } = useAppSelector((state: RootState) => state.trackers)
   const updateTrackerByIdActionLoading = useAppSelector(
-    (state: RootState) => state.trackers.loadings['updateTrackerByIdActionLoading']
+    (state: RootState) =>
+      state.trackers.loadings['updateTrackerByIdActionLoading']
   )
 
   const data = SICKNESS_OPTIONS.map((item) => ({
@@ -40,15 +41,14 @@ export const TrackerDetailPage = () => {
       : undefined
 
   const schema = yup.object().shape({
-    name: yup
-      .string()
-      .trim()
-      .required(i18next.t('error:required')),
+    name: yup.string().trim().required(i18next.t('error:required')),
+    slug: yup.string().trim().required(i18next.t('error:required')),
   })
 
   const { control, handleSubmit } = useForm<IEditTrackerData>({
     defaultValues: {
       name: selectedTrackers?.name,
+      slug: selectedTrackers?.slug,
     },
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
@@ -62,6 +62,7 @@ export const TrackerDetailPage = () => {
         updateTrackerByIdAction({
           id: selectedTrackers?.id,
           name: data?.name,
+          slug: data?.slug,
         })
       ).unwrap()
 
@@ -102,6 +103,31 @@ export const TrackerDetailPage = () => {
                       alignment="col"
                       label={t('tracker:name')}
                       name="name"
+                      className="input"
+                      value={value}
+                      type="text"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        onChange(e.target.value)
+                      }}
+                      errors={error?.message}
+                    />
+                  )
+                }}
+              />
+            </div>
+            <div className="w-1/4 mb-4 ml-24">
+              <Controller
+                name="slug"
+                control={control}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <Input
+                      alignment="col"
+                      label={t('tracker:slug')}
+                      name="slug"
                       className="input"
                       value={value}
                       type="text"

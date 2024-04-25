@@ -31,6 +31,7 @@ export interface IUserDetail {
   gender?: string
   role?: IRole
   createdAt?: string
+  statistics?: any
 }
 
 export interface IUserReport {

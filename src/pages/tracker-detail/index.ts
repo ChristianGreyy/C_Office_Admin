@@ -1,1 +1,1 @@
-export * from './PositionDetailPage'
+export * from './TrackerDetailPage'

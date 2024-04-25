@@ -44,11 +44,16 @@ export const PriorityDetailPage = () => {
       .string()
       .trim()
       .required(i18next.t('error:required')),
+      slug: yup
+      .string()
+      .trim()
+      .required(i18next.t('error:required')),
   })
 
   const { control, handleSubmit } = useForm<IEditPriorityData>({
     defaultValues: {
       name: selectedPriorities?.name,
+      slug: selectedPriorities?.slug,
     },
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
@@ -62,6 +67,7 @@ export const PriorityDetailPage = () => {
         updatePriorityByIdAction({
           id: selectedPriorities?.id,
           name: data?.name,
+          slug: data?.slug,
         })
       ).unwrap()
 
@@ -102,6 +108,31 @@ export const PriorityDetailPage = () => {
                       alignment="col"
                       label={t('priority:name')}
                       name="name"
+                      className="input"
+                      value={value}
+                      type="text"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        onChange(e.target.value)
+                      }}
+                      errors={error?.message}
+                    />
+                  )
+                }}
+              />
+            </div>
+            <div className="w-1/4 mb-4 ml-24">
+              <Controller
+                name="slug"
+                control={control}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <Input
+                      alignment="col"
+                      label={t('priority:slug')}
+                      name="slug"
                       className="input"
                       value={value}
                       type="text"

@@ -40,19 +40,15 @@ export const StatusDetailPage = () => {
       : undefined
 
   const schema = yup.object().shape({
-    name: yup
-      .string()
-      .trim()
-      .required(i18next.t('error:required')),
-    color: yup
-      .string()
-      .trim()
-      .required(i18next.t('error:required'))
+    name: yup.string().trim().required(i18next.t('error:required')),
+    slug: yup.string().trim().required(i18next.t('error:required')),
+    color: yup.string().trim().required(i18next.t('error:required')),
   })
 
   const { control, handleSubmit } = useForm<IEditStatusData>({
     defaultValues: {
       name: selectedStatuss?.name,
+      slug: selectedStatuss?.slug,
       color: selectedStatuss?.color,
     },
     reValidateMode: 'onChange',
@@ -67,6 +63,7 @@ export const StatusDetailPage = () => {
         updateStatusByIdAction({
           id: selectedStatuss?.id,
           name: data?.name,
+          slug: data?.slug,
           color: data?.color,
         })
       ).unwrap()
@@ -108,6 +105,31 @@ export const StatusDetailPage = () => {
                       alignment="col"
                       label={t('status:name')}
                       name="name"
+                      className="input"
+                      value={value}
+                      type="text"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        onChange(e.target.value)
+                      }}
+                      errors={error?.message}
+                    />
+                  )
+                }}
+              />
+            </div>
+            <div className="w-1/4 mb-4 ml-24">
+              <Controller
+                name="slug"
+                control={control}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <Input
+                      alignment="col"
+                      label={t('status:slug')}
+                      name="slug"
                       className="input"
                       value={value}
                       type="text"

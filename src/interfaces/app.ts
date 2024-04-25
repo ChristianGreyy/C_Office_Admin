@@ -82,5 +82,8 @@ export type RouterParams = {
   }
   NotificationEditPage: {
     notificationId: string
+  },
+  ProjectDetailPage: {
+    projectId: string
   }
 }

@@ -22,6 +22,12 @@ export const addTrackerSchema = z.object({
     .trim()
     .nonempty({
       message: t('error:required') as string,
+    }),
+  slug: z
+    .string()
+    .trim()
+    .nonempty({
+      message: t('error:required') as string,
     })
 })
 
@@ -35,6 +41,7 @@ const AddTrackerModal = ({ open, onClose, onSave, isLoading }: Props) => {
   } = useForm<TUpdateTrackerData>({
     defaultValues: {
       name: '',
+      slug: '',
     },
     resolver: zodResolver(addTrackerSchema),
     mode: 'onSubmit',
@@ -70,6 +77,29 @@ const AddTrackerModal = ({ open, onClose, onSave, isLoading }: Props) => {
                     alignment="col"
                     label={t('tracker:name') as string}
                     name="name"
+                    className="input "
+                    value={value}
+                    type="text"
+                    onChange={onChange}
+                    errors={error?.message}
+                  />
+                )
+              }}
+            />
+          </div>
+          <div className="mt-[16px]">
+            <Controller
+              name="slug"
+              control={control}
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => {
+                return (
+                  <Input
+                    alignment="col"
+                    label={t('tracker:slug') as string}
+                    name="slug"
                     className="input "
                     value={value}
                     type="text"

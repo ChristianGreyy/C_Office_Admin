@@ -19,11 +19,13 @@ export type TDeletePriorityData = Partial<IPriorityDetail> & { isSoft: boolean }
 export interface IPriorityDetail {
   id?: number
   name?: string
+  slug?: string
   color?: string
   createdAt?: string
 }
 
 export interface IEditPriorityData {
   name?: string
+  slug?: string
   color?: string
 }

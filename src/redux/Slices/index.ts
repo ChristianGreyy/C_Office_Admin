@@ -12,6 +12,8 @@ import notificationsSlice from './notification-management'
 import planReducer from './plan'
 import positionsSlice from './position-management'
 import prioritiesSlice from './priority-management'
+import projectSlice from './project-management'
+import requestSlice from './request-management'
 import rolesSlice from './role-management'
 import statusSlice from './status-management'
 import tierReducer from './tier'
@@ -30,6 +32,8 @@ export * from './notification-management'
 export * from './plan'
 export * from './position-management'
 export * from './priority-management'
+export * from './project-management'
+export * from './request-management'
 export * from './role-management'
 export * from './status-management'
 export * from './tier'
@@ -56,6 +60,8 @@ const productReducer = combineReducers({
   universities: universitiesSlice,
   roles: rolesSlice,
   notifications: notificationsSlice,
+  projects: projectSlice,
+  requests: requestSlice,
   dashboard: dashboardSlice,
 })
   

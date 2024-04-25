@@ -40,6 +40,13 @@ export const NavMenuIcon = (props: IProps) => {
       //       {...props}
       //     />
       //   );
+      case enumNavKey.REQUEST_MANAGEMENT:
+        return (
+          <UserOutlined
+            className="mr-2"
+            style={{ fontSize: '16px', verticalAlign: 'middle' }}
+          />
+        )
       case enumNavKey.USER_MANAGEMENT:
         return (
           <UserOutlined

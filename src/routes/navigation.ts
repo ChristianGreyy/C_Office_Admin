@@ -50,3 +50,9 @@ export const PATH_CHAT_CHANNEL = '/chat-channel'
 // Manage role
 export const PATH_MANAGE_ROLE = '/manage-role'
 export const PATH_STAFF_AND_ROLE_MANAGEMENT = '/staff-and-role-management'
+// Manage project
+export const PATH_MANAGE_PROJECT = '/manage-project'
+export const PATH_PROJECT_MANAGEMENT = '/project-management'
+export const PATH_EDIT_PROJECT = `${PATH_PROJECT_MANAGEMENT}/edit/:projectId`
+// Mamange request 
+export const PATH_REQUEST_MANAGEMENT = '/request-management'

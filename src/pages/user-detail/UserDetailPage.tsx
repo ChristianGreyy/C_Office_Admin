@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Card, message } from 'antd'
-import type { SelectProps } from 'antd'
 
+import { Chart } from 'chart.js'
 import i18next from 'i18next'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -13,11 +13,12 @@ import { EUserGender, SICKNESS_OPTIONS } from '@configs'
 import { BaseResponseError, IEditUserData, RouterParams } from '@interfaces'
 import {
   RootState,
+  getUserByIdAction,
   updateUserByIdAction,
   useAppDispatch,
   useAppSelector,
 } from '@redux'
-import { Button, Input, SwitchButton, Text, TextArea } from 'src/common'
+import { Button, Input, SwitchButton, Text } from 'src/common'
 import { ShareSelectInput } from '../../components'
 
 export const UserDetailPage = () => {
@@ -26,7 +27,7 @@ export const UserDetailPage = () => {
 
   const { userId } = useParams<RouterParams['UserDetailPage']>()
   const dispatch = useAppDispatch()
-  const { users } = useAppSelector((state: RootState) => state.users)
+  const { users, user } = useAppSelector((state: RootState) => state.users)
   const updateUserByIdActionLoading = useAppSelector(
     (state: RootState) => state.users.loadings['updateUserByIdActionLoading']
   )
@@ -35,13 +36,13 @@ export const UserDetailPage = () => {
     label: item,
     value: item,
   }))
+  const getUserById = () => {
+    dispatch(getUserByIdAction(userId || ''))
+  }
 
-  const selectedUsers =
-    users && users.length && userId
-      ? users?.find((user) => user.id === +userId)
-      : undefined
-
-  console.log('selectedUsers', selectedUsers)
+  useEffect(() => {
+    getUserById()
+  }, [dispatch])
 
   const schema = yup.object().shape({
     email: yup
@@ -61,26 +62,35 @@ export const UserDetailPage = () => {
     status: yup.string().required(i18next.t('error:required')),
   })
 
-  const { control, handleSubmit } = useForm<IEditUserData>({
-    defaultValues: {
-      email: selectedUsers?.email,
-      phone: selectedUsers?.phone,
-      firstName: selectedUsers?.firstName,
-      lastName: selectedUsers?.lastName,
-      status: selectedUsers?.status,
-      gender: selectedUsers?.gender,
-    },
-    reValidateMode: 'onChange',
-    resolver: yupResolver(schema),
-  })
+  const { control, handleSubmit, setValue, getValues } = useForm<IEditUserData>(
+    {
+      defaultValues: {
+        email: user?.email,
+        phone: user?.phone,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        status: user?.status,
+        gender: user?.gender,
+      },
+      reValidateMode: 'onChange',
+      resolver: yupResolver(schema),
+    }
+  )
 
   const onInvalid = (errors: any) => console.error(errors)
-
+  if (user) {
+    setValue('email', getValues('email') || user.email)
+    setValue('phone', getValues('phone') || user.phone)
+    setValue('firstName', getValues('firstName') || user.firstName)
+    setValue('lastName', getValues('lastName') || user.lastName)
+    setValue('status', getValues('status') || user.status)
+    setValue('gender', getValues('gender') || user.gender)
+  }
   const handleClickAction = handleSubmit(async (data) => {
     try {
       const response = await dispatch(
         updateUserByIdAction({
-          id: selectedUsers?.id,
+          id: user?.id,
           email: data?.email,
           phone: data?.phone,
           firstName: data?.firstName,
@@ -110,9 +120,57 @@ export const UserDetailPage = () => {
     }
   }, [userId])
 
+  useEffect(() => {
+    var ctx = document?.getElementById('myChart')
+    if (ctx && user) {
+      console.log('user', user.statistics)
+      const projects = Object.keys(user.statistics)
+      let bugs = []
+      let features = []
+      for (const item of Object.keys(user.statistics)) {
+        bugs.push(user.statistics[item]['bug'])
+        features.push(user.statistics[item]['feature'])
+      }
+      var myChart = new Chart(ctx as any, {
+        type: 'bar',
+        data: {
+          labels: projects,
+          datasets: [
+            {
+              data: features,
+              label: 'Feature',
+              borderColor: 'rgb(17, 11, 201)',
+              backgroundColor: 'rgb(17, 11, 201,0.5)',
+              borderWidth: 2,
+            },
+            {
+              data: bugs,
+              label: 'Bugs',
+              borderColor: 'rgb(203, 14, 14)',
+              backgroundColor: 'rgb(203, 14, 14,0.5)',
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'right',
+            },
+            title: {
+              display: true,
+              text: 'Chart.js Horizontal Bar Chart',
+            },
+          },
+        },
+      })
+    }
+  }, [user])
+
   return (
     <Card>
-      {selectedUsers ? (
+      {user ? (
         <div>
           <div className="flex gap-0.5 flex-wrap max:[640px]:flex-col">
             <div className="w-1/4 mb-4 ml-24">
@@ -291,6 +349,14 @@ export const UserDetailPage = () => {
             >
               Cancel
             </Button>
+          </div>
+          <h1 className="w-[150px] mx-auto mt-10 text-xl font-semibold capitalize ">
+            Performance
+          </h1>
+          <div className="w-[1100px] h-screen flex mx-auto my-auto">
+            <div className="border border-gray-400 pt-0 rounded-xl  w-full h-fit my-auto  shadow-xl">
+              <canvas id="myChart"></canvas>
+            </div>
           </div>
         </div>
       ) : (

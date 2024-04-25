@@ -6,6 +6,7 @@ import {
   PATH_NOTIFICATION,
   PATH_POSITION_MANAGEMENT,
   PATH_PRIORITY_MANAGEMENT,
+  PATH_REQUEST_MANAGEMENT,
   PATH_STAFF_AND_ROLE_MANAGEMENT,
   PATH_STATUS_MANAGEMENT,
   PATH_TRACKER_MANAGEMENT,
@@ -24,7 +25,7 @@ import {
 export const DEFAULT_LANGUAGE = process.env.REACT_APP_LANGUAGE || 'frn'
 const ALL_THEMES = 'themes'
 const CURRENT_THEME = 'theme'
-export const COFFICE_ACCESS_TOKEN = 'coffice-access-token'
+export const COFFICE_ACCESS_TOKEN = 'coffice-admin-access-token'
 
 const SIDEBAR_WIDTH = '260px'
 const SIDEBAR_COLLAPSED_WIDTH = '92px'
@@ -37,6 +38,11 @@ const SIDEBAR_DATA: SideBarData[] = [
     label: 'Dashboard',
     path: PATH_HOME,
     pathKey: enumNavKey.DASHBOARD,
+  },
+  {
+    label: 'Requeset Management',
+    path: PATH_REQUEST_MANAGEMENT,
+    pathKey: enumNavKey.REQUEST_MANAGEMENT,
   },
   // {
   //   label: 'Plan Management',

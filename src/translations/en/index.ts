@@ -10,6 +10,7 @@ import status from './status.json'
 import tracker from './tracker.json'
 import university from './university.json'
 import user from './user.json'
+import project from './project.json'
 export const en = {
   common,
   login,
@@ -23,4 +24,5 @@ export const en = {
   priority,
   tracker,
   status,
+  project,
 }

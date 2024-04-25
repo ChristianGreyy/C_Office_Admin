@@ -1,68 +1,153 @@
-import { Card, DatePicker, Skeleton } from 'antd'
+import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
+import { Card, Skeleton, message } from 'antd'
 import { format } from 'date-fns'
+import queryString from 'query-string'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
-import { NewUserChart, RevenueChart } from '@components'
-import { EUserGender } from '@configs'
+import {
+  EKeyBoardCode,
+  INITIAL_PAGINATION_SiZE,
+  PATH_PROJECT_MANAGEMENT
+} from '@configs'
+import { BaseResponseError, TUpdateProjectData } from '@interfaces'
 import {
   RootState,
-  getNewUserStatAction,
-  getRevenueStatAction,
-  selectDashboardLoading,
+  addProjectAction,
+  deleteProjectAction,
+  getAllProjectsAction,
+  selectProjectsLoading,
   useAppDispatch,
 } from '@redux'
-import moment from 'moment'
-import { SharedTable } from 'src/common'
-import { useMemo } from 'react'
+import { t } from 'i18next'
+import { Button, Input, SharedTable } from 'src/common'
+import AddProjectModal from './AddProjectModal'
+import ConfirmDeleteModal from './ConfirmDeleteModal'
 
 type Props = {}
 
-const { RangePicker } = DatePicker
-
 export const Dashboard = (props: Props) => {
   const navigate = useNavigate()
-  const [dates, setDates] = useState([
-    moment().subtract(7, 'days').format('YYYY-MM-DD'),
-    moment().format('YYYY-MM-DD'),
-  ])
+  const { search } = useLocation()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchValue, setSearchValue] = useState('')
+  const [pageSize, setPageSize] = useState(INITIAL_PAGINATION_SiZE)
+  const [isAddingProject, setIsAddingProject] = useState<boolean>(false)
+  const [isDeletingProject, setIsDeletingProject] = useState<boolean>(false)
+  const [openAddProjectModal, setOpenAddProjectModal] =
+    useState<boolean>(false)
+
+  const [openConfirmDeleteModal, setOpenConfirmDeleteModal] =
+    useState<boolean>(false)
+  const location = useLocation()
 
   const dispatch = useAppDispatch()
-  const getRevenueStatActionLoading = useSelector((state: RootState) =>
-    selectDashboardLoading(state, 'getRevenueStatActionLoading')
+  const getAllProjectsActionLoading = useSelector((state: RootState) =>
+    selectProjectsLoading(state, 'getAllProjectsAction')
   )
-  const getNewUserStatActionLoading = useSelector((state: RootState) =>
-    selectDashboardLoading(state, 'getNewUserStatActionLoading')
-  )
-  const { users, userStats, revenueStats } = useSelector(
-    (state: RootState) => state.dashboard
+  const { membersLayout, projects, projectsCurrentPage, projectsTotalItems } = useSelector(
+    (state: RootState) => state.projects
   )
 
-  const getDashboard = () => {
-    dispatch(
-      getRevenueStatAction({
-        from: dates[0],
-        to: dates[1],
-      })
-    )
-    dispatch(
-      getNewUserStatAction({
-        from: dates[0],
-        to: dates[1],
-      })
-    )
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(
+    null
+  )
+
+  const data = useSelector((state: RootState) => state.projects)
+
+  const getAllProjects = () => {
+    if (search) {
+      const parsedQuery = queryString.parse(search)
+      dispatch(getAllProjectsAction(parsedQuery))
+      return
+    }
+
+    dispatch(getAllProjectsAction())
   }
 
-  const handleSelect = (_: any, dateStrings: any) => {
-    setDates(dateStrings)
+  const onSearchProjects = (page?: number) => {
+    const localURlQuery: any = {
+      page: page ?? 1,
+      limit: INITIAL_PAGINATION_SiZE,
+    }
+    if (searchValue) {
+      localURlQuery.search = searchValue
+    }
+
+    const stringifyQuery = queryString.stringify(localURlQuery)
+    setSearchParams(stringifyQuery)
+  }
+
+  const onOpenProjectModal = () => {
+    setOpenAddProjectModal(true)
+  }
+
+  const onCloseProjectModal = () => {
+    setOpenAddProjectModal(false)
+  }
+
+  const onOpenConfirmDeleteModal = () => {
+    setOpenConfirmDeleteModal(true)
+  }
+
+  const onCloseConfirmDeleteModal = () => {
+    setOpenConfirmDeleteModal(false)
+  }
+
+  const onAddProject = async (data: TUpdateProjectData) => {
+    const { ...passData } = data
+    setIsAddingProject(true)
+    const payload: any = {
+      ...passData,
+    }
+    try {
+      const response = await dispatch(addProjectAction(payload)).unwrap()
+      message.success({
+        content: 'Create project succesfully',
+      })
+      onCloseProjectModal()
+      getAllProjects()
+    } catch (err) {
+      const error = err as BaseResponseError
+      if (error) {
+        message.error({
+          content: error?.message,
+        })
+      }
+    } finally {
+      setIsAddingProject(false)
+    }
+  }
+
+  const onDeleteProject = async () => {
+    try {
+      if(selectedProjectId) {
+        setIsDeletingProject(true)
+        const response = await dispatch(deleteProjectAction(selectedProjectId)).unwrap()
+        message.success({
+          content: 'Delete project succesfully',
+        })
+        getAllProjects()
+      }
+      onCloseConfirmDeleteModal();
+    } catch (err) {
+      const error = err as BaseResponseError
+      if (error) {
+        message.error({
+          content: error?.message,
+        })
+      }
+    } finally {
+      setIsDeletingProject(false)
+    }
   }
 
   const columns = [
     {
       title: 'No',
       dataIndex: 'no',
-      key: '_id',
+      key: 'id',
     },
     {
       title: 'Name',
@@ -70,34 +155,14 @@ export const Dashboard = (props: Props) => {
       key: 'name',
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: 'Kick off date',
+      dataIndex: 'kickOffDate',
+      key: 'kickOffDate',
     },
     {
-      title: 'Gender',
-      dataIndex: 'gender',
-      key: 'gender',
-      render: (e: any) => {
-        return (
-          <>
-            {
-              {
-                [EUserGender.FEMALE as any]: 'Female',
-                [EUserGender.MALE]: 'Male',
-              }[e]
-            }
-          </>
-        )
-      },
-    },
-    {
-      title: 'Sickness',
-      dataIndex: 'sickness',
-      key: 'sickness',
-      render: (e: any) => {
-        return <span className="capitalize">{e.join(', ')}</span>
-      },
+      title: 'Deadline',
+      dataIndex: 'deadline',
+      key: 'deadline',
     },
     {
       title: 'Created Time',
@@ -108,78 +173,113 @@ export const Dashboard = (props: Props) => {
       },
     },
     {
-      title: 'Status',
-      dataIndex: 'isActive',
-      key: 'isActive',
-      render: (e: any) => {
-        return <>{e ? 'Active' : 'Inactive'}</>
-      },
+      title: 'Action',
+      key: 'action',
+      dataIndex: 'id',
+      render: (id: any) => (
+        <div className="flex space-x-4">
+          <EditOutlined
+            className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
+            onClick={() => {
+              navigate(`${PATH_PROJECT_MANAGEMENT}/edit/${id}`)
+            }}
+          />
+          <DeleteOutlined
+            className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
+            onClick={() => {
+              onOpenConfirmDeleteModal();
+              setSelectedProjectId(id);
+            }}
+          />
+        </div>
+      ),
     },
   ]
 
   useEffect(() => {
-    getDashboard()
-  }, [dispatch, dates])
-
-  const totalNewUser = useMemo(() => {
-    return userStats?.reduce((acc, cur) => {
-      return acc + cur.newUser
-    }, 0)
-  }, [userStats])
+    getAllProjects()
+  }, [dispatch, search])
 
   return (
     <Card>
-      <div className="sm:pl-[0.75rem] sm:pr-[0.5rem] sm:max-w-[500px] flex items-center sm:justify-between flex-col sm:flex-row">
-        <RangePicker
-          defaultValue={[moment(dates[0]), moment(dates[1])]}
-          allowClear={false}
-          onChange={handleSelect}
-        />
-      </div>
-      <div className="flex justify-between max:[50%]:flex-col mt-4 mb-4">
-        <div className="flex-1 sm:flex-[0_0_50%] sm:max-w-[50%] min-h-[1px] flex flex-col items-center">
-          <div className="text-center border-2 rounded-lg w-3/4 mb-4">
-            <h1 className="text-xl">Total revenue</h1>
-            <h1 className="text-2xl font-semibold">
-              ${' '}
-              {revenueStats
-                ? revenueStats?.monthlyTotal + revenueStats?.yearlyTotal
-                : 0}
-            </h1>
-          </div>
-          <div>
-            <RevenueChart revenueStats={revenueStats} />
-          </div>
-        </div>
-        <div className="flex-1 sm:flex-[0_0_50%] sm:max-w-[50%] min-h-[1px] flex flex-col items-center">
-          <div className="text-center border-2 rounded-lg w-3/4 mb-4">
-            <h1 className="text-xl">Total of new user</h1>
-            <h1 className="text-2xl font-semibold">{totalNewUser}</h1>
-          </div>
-          <div>
-            <NewUserChart userStats={userStats} />
-          </div>
-        </div>
-      </div>
-      <div>
-        <h1 className="text-xl">Summary</h1>
-        {getNewUserStatActionLoading ? (
-          <Skeleton paragraph={{ rows: 4 }} />
-        ) : (
-          <SharedTable
-            columns={columns}
-            dataSource={users?.map((user: any, index: number) => {
-              return {
-                ...user,
-                key: user._id,
-                no: index + 1,
-                sickness: user?.userData?.sickness ?? [],
-                gender: user?.userData?.gender,
+      <div className="sm:pl-[0.75rem] sm:pr-[0.5rem] flex items-center sm:justify-between flex-col sm:flex-row">
+        <div className="max-w-[500px] flex-1 flex-row flex">
+          <Input
+            placeholder={t('common:project_management_placeholder')}
+            value={searchValue}
+            onChange={(e) => {
+              setSearchValue(e.target.value)
+            }}
+            onKeyDown={(e) => {
+              if (e.key === `${EKeyBoardCode.ENTER}`) {
+                onSearchProjects()
               }
-            })}
+            }}
+            prefix={
+              <span className="flex items-center justify-center pl-[0.75rem]">
+                <SearchOutlined />
+              </span>
+            }
           />
-        )}
+
+          <Button
+            size="small"
+            type="primary"
+            style={{
+              minWidth: '4rem',
+            }}
+            className="ml-1"
+            onClick={() => {
+              onSearchProjects()
+            }}
+          >
+            Search
+          </Button>
+        </div>
+        <div className="flex items-center gap-[16px]">
+          <Button type="primary" onClick={onOpenProjectModal}>
+            Add new project
+          </Button>
+        </div>
       </div>
+      {getAllProjectsActionLoading ? (
+        <Skeleton paragraph={{ rows: 4 }} />
+      ) : (
+        <SharedTable
+          columns={columns}
+          dataSource={projects?.map((project, index) => {
+            return {
+              ...project,
+              key: project.id,
+              no: index + 1,
+              // sickness: project?.projectData?.sickness ?? [],
+              // gender: project?.projectData?.gender,
+            }
+          })}
+          paginationProps={{
+            total: !!projectsTotalItems ? +projectsTotalItems : undefined,
+            pageSize: INITIAL_PAGINATION_SiZE,
+            current: +projectsCurrentPage,
+            onChange(page) {
+              onSearchProjects(page)
+            },
+          }}
+        />
+      )}
+      <AddProjectModal
+        open={openAddProjectModal}
+        onClose={onCloseProjectModal}
+        onSave={onAddProject}
+        isLoading={isAddingProject}
+      />
+      <ConfirmDeleteModal
+        open={openConfirmDeleteModal}
+        onClose={onCloseConfirmDeleteModal}
+        onDelete={onDeleteProject}
+        title={'Delete project'}
+        content={'Are you sure to delete this project?'}
+        isLoading={isDeletingProject}
+      />
     </Card>
   )
 }

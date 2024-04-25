@@ -9,6 +9,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   EKeyBoardCode,
   INITIAL_PAGINATION_SiZE,
+  PATH_PRIORITY_MANAGEMENT,
   PATH_TRACKER_MANAGEMENT,
 } from '@configs'
 import { BaseResponseError, TUpdatePriorityData } from '@interfaces'
@@ -176,7 +177,7 @@ export const PriorityManagementPage = (props: Props) => {
           <EditOutlined
             className="text-lg font-light mr-2.5 cursor-pointer text-[#184f64]"
             onClick={() => {
-              navigate(`${PATH_TRACKER_MANAGEMENT}/edit/${id}`)
+              navigate(`${PATH_PRIORITY_MANAGEMENT}/edit/${id}`)
             }}
           />
           <DeleteOutlined

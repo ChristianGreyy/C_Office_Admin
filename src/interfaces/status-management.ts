@@ -19,11 +19,13 @@ export type TDeleteStatusData = Partial<IStatusDetail> & { isSoft: boolean }
 export interface IStatusDetail {
   id?: number
   name?: string
+  slug?: string
   color?: string
   createdAt?: string
 }
 
 export interface IEditStatusData {
   name?: string
+  slug?: string
   color?: string
 }
